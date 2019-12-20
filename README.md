@@ -20,7 +20,11 @@ White | Gray | Black
 
 ---
 
-Base code for a color blender in Java by [Deleplace on StackOverflow].
-Alterations by Amelia Hetrick.
+Base code for a color blender in Java by [Deleplace on StackOverflow]. Alterations to code by Amelia Hetrick.
+<br/>
+Results of test cases determined with [Eric A. Meyer's Color Blender].
+
+
 
 [Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
+[Eric A. Meyer's Color Blender]: https://meyerweb.com/eric/tools/color-blend/
