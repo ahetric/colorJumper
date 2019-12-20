@@ -21,7 +21,7 @@ Parameter 1 | Parameter 2 | Result
 Color 1 | Midpoint | Color 2
 White | Gray | Black
 
-![A visual representation of the above table][colorJumper]
+<img src=[colorJumper] width="300" />
 
 ---
 
