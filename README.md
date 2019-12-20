@@ -20,11 +20,14 @@ White | Gray | Black
 
 ---
 
-Base code for a color blender in Java by [Deleplace on StackOverflow]. Alterations to code by Amelia Hetrick.
-<br/>
-Results of test cases determined with [Eric A. Meyer's Color Blender].
+Base code for a color blender in Java by [Valentin Deleplace on StackOverflow].\
+Results of test cases determined with [Eric A. Meyer's Color Blender].\
+Base code for rectangle 2D graphics in Java by [Wayan Saryada on Kode Java].\
+Method for handling new lines with Java Graphics2D drawString by [Andreas Lundblad on StackOverflow].
 
 
 
-[Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
+[Valentin Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
 [Eric A. Meyer's Color Blender]: https://meyerweb.com/eric/tools/color-blend/
+[Wayan Saryada on Kode Java]: https://kodejava.org/how-do-i-draw-a-rectangle-in-java-2d/
+[Andreas Lundblad on StackOverflow]: https://stackoverflow.com/a/4413153
