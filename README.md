@@ -17,3 +17,10 @@ Parameter 1 | Parameter 2 | Result
 ----------- | ----------- | ------
 "Extreme" color 1 | Midpoint | "Extreme" color 2
 White | Gray | Black
+
+---
+
+Base code for a color blender in Java by [Deleplace on StackOverflow].
+Alterations by Amelia Hetrick.
+
+[Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
