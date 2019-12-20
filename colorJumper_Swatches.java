@@ -16,7 +16,7 @@ public class colorJumper_Swatches {
       
       // Set location and size of square
       int x = padSize;
-      if (type == "Extreme") {
+      if (type == "Initial") {
       //if (type == "Color 1") {
       }  
       else if (type == "Midpoint") {
@@ -98,15 +98,15 @@ public class colorJumper_Swatches {
                         //HexColorJumper jump = new HexColorJumper("#FF0000", "#7F7F7F");
                         //HexColorJumper jump = new HexColorJumper("#FF0000", "#80807e");
                         
-                        HexColorJumper jump = new HexColorJumper("#FF0000", "#CCCCCC");
+                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#CCCCCC");
                         
-                        //HexColorJumper jump = new HexColorJumper("#00FFFF", "#80B3FF");
+                        HexColorJumper jump = new HexColorJumper("#00FFFF", "#80B3FF");
                         String c = jump.calculate(jump.getC1(), jump.getC2());
                       
                         r = jump.getR1_int();
                         g = jump.getG1_int();
                         b = jump.getB1_int();
-                        type = "Extreme";
+                        type = "Initial";
                         //type = "Color 1";
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         

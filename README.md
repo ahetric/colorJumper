@@ -6,17 +6,17 @@ colorJumper works as a counterpart to a color blender. There are many color blen
 
 For example, color blenders behave like this:
 
- Parameter 1 | Return   | Parameter 2 | Calculation
+ Parameter 1 | Output   | Parameter 2 | Calculation
 :-----------:|:--------:|:-----------:|:-----------
- Color1      | Midpoint | Color2      | `Return: Midpoint = midpoint(Color1,Color2)`
+ Color1      | Midpoint | Color2      | `Midpoint = midpoint(Color1,Color2)`
 
 <img src="/README_images/colorBlenders.png" width="300" />
 
 However, colorJumper behaves like this:
 
- Parameter 1 | Parameter 2 | Return | Calculation
+ Parameter 1 | Parameter 2 | Output | Calculation
 :-----------:|:-----------:|:------:|:-----------
- Initial     | Midpoint    | Result | `Return: Result such that Midpoint = midpoint(Initial,Result)`
+ Initial     | Midpoint    | Result | `Result such that Midpoint = midpoint(Initial,Result)`
 
 <img src="/README_images/colorJumper.png" width="300" />
 
@@ -26,9 +26,9 @@ However, colorJumper behaves like this:
 
 For now, run colorJumper_Swatches.java with no CLI; the parameters are hardcoded in the main method. I have plans to add in CLI in the near future. Currently, this program only works with hexadecimal representation of colors as input/output. I have tentative plans to add RGB representation along with CLI, but that is low priority.
 
-__colorJumper_Swatches.java__ is the runner, handles the graphics, and calls HexColorJumper.java.\
-__HexColorJumper.java__ does the calculations.\
-__HexColorJumperTest.java__ consists of JUnit tests.
+_colorJumper_Swatches.java_ is the runner, handles the graphics, and calls HexColorJumper.java.\
+_HexColorJumper.java_ does the calculations.\
+_HexColorJumperTest.java_ consists of JUnit tests.
 
 ---
 
