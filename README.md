@@ -12,7 +12,7 @@ Parameter 1 | Result | Parameter 2
 Color 1 | Midpoint | Color 2
 White | Black | Gray
 
-![A visual representation of the above table](/README_images/colorBlenders.png | width=300)
+<img src="/README_images/colorBlenders.png" width="300" />
 
 However, colorJumper behaves like this:
 
