@@ -30,7 +30,7 @@ For now, run colorJumper_Swatches.java with no CLI, and the parameters hardcoded
 
 ### A note about the color gray
 
-A "pure gray" (midpoint(black,white) = midpoint(0x000000,0xffffff) = 0x808080) used as a midpoint will return the complement of the initial color. Example:
+A "pure gray" `(midpoint(black,white) = midpoint(0x000000,0xffffff) = 0x808080)` used as a midpoint will return the complement of the initial color. Example:
 
 <img src="/README_images/pureGrayCreatesComplement.png" width="300" />
 
@@ -41,7 +41,7 @@ However, not every (gray) color is achievable as a blend of only two colors. Usi
 
 ---
 
-### Code Credit
+### Code credit
 
 ###### HexColorJumper.java
 Base code for a color blender in Java by [Valentin Deleplace on StackOverflow].
