@@ -22,9 +22,13 @@ Color1      | Midpoint    | Color2 | `Result = Color2 such that Midpoint = midpo
 
 ---
 
-### How to run
+### How to run and explanation of files
 
-For now, run colorJumper_Swatches.java with no CLI, and the parameters hardcoded in the main method. I have plans to allow for CLI in the near future. Additionally, there is current support for hexadecimal representation of colors only.
+For now, run colorJumper_Swatches.java with no CLI; the parameters are hardcoded in the main method. I have plans to add in CLI in the near future. Currently, this program only works with hexadecimal representation of colors as input/output. I have tentative plans to add RGB representation along with CLI, but that is low priority.
+
+colorJumper_Swatches.java is the runner, handles the graphics, and calls HexColorJumper.java.\
+HexColorJumper.java does the calculations.\
+HexColorJumperTest.java consists of JUnit tests.
 
 ---
 
