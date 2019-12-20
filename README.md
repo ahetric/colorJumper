@@ -11,6 +11,7 @@ Parameter 1 | Result | Parameter 2
 ----------- | ------ | -----------
 "Extreme" color 1 | Midpoint | "Extreme" color 2
 White | Black | Gray
+
 ![A visual representation of the above table][colorBlenders]
 
 However, colorJumper behaves like this:
@@ -19,6 +20,7 @@ Parameter 1 | Parameter 2 | Result
 ----------- | ----------- | ------
 "Extreme" color 1 | Midpoint | "Extreme" color 2
 White | Gray | Black
+
 ![A visual representation of the above table][colorJumper]
 
 ---
@@ -38,7 +40,7 @@ Method for handling new lines with Java Graphics2D drawString by [Andreas Lundbl
 
 
 [colorBlenders]: /README_images/colorBlenders.png
-[colorBlenders]: /README_images/colorJumper.png
+[colorJumper]: /README_images/colorJumper.png
 
 [Valentin Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
 [Eric A. Meyer's Color Blender]: https://meyerweb.com/eric/tools/color-blend/
