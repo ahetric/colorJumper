@@ -6,17 +6,17 @@ colorJumper works as a counterpart to a color blender. There are many color blen
 
 For example, color blenders behave like this:
 
- <sub>Parameter 1</sub> | Output   | <sub>Parameter 2</sub> | Calculation
-:----------------------:|:--------:|:----------------------:|:-----------
- Color1                 | Midpoint | Color2                 | `Midpoint = midpoint(Color1,Color2)`
+ <sub>Parameter 1</sub> | <sub>Color Result</sub>| <sub>Parameter 2</sub> | Calculation
+:----------------------:|:----------------------:|:----------------------:|:-----------
+ Color1                 | Midpoint               | Color2                 | `Midpoint = midpoint(Color1,Color2)`
 
 <img src="/README_images/colorBlenders.png" width="300" />
 
 However, colorJumper behaves like this:
 
- <sub>Parameter 1</sub> | <sub>Parameter 2</sub> | <sub>Color Result</sub> | Calculation
-:----------------------:|:----------------------:|:------:|:-----------
- Initial                | Midpoint               | Result | `Result such that Midpoint = midpoint(Initial,Result)`
+ <sub>Parameter 1</sub> | <sub>Parameter 2</sub> | <sub>Color Result</sub> | <sub>Calculation</sub>
+:----------------------:|:----------------------:|:-----------------------:|:-----------
+ Initial                | Midpoint               | Result                  | `Result such that Midpoint = midpoint(Initial,Result)`
 
 <img src="/README_images/colorJumper.png" width="300" />
 
