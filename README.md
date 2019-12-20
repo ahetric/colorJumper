@@ -21,7 +21,7 @@ Parameter 1 | Parameter 2 | Result
 Color 1 | Midpoint | Color 2
 White | Gray | Black
 
-<img src="[colorJumper]" width="300" />
+<img src=[colorJumper] width="300" />
 
 ---
 
