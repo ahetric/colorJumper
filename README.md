@@ -14,7 +14,7 @@ For example, color blenders behave like this:
 
 However, colorJumper behaves like this:
 
- <sub>Parameter 1</sub> | <sub>Parameter 2</sub> | <sub>Output/Result</sub> | Calculation
+ <sub>Parameter 1</sub> | <sub>Parameter 2</sub> | <sub>Output:Result</sub> | Calculation
  Initial                | Midpoint               | Result | `Result such that Midpoint = midpoint(Initial,Result)`
 
 <img src="/README_images/colorJumper.png" width="300" />
