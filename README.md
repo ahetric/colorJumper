@@ -30,11 +30,11 @@ For now, run colorJumper_Swatches.java with no CLI, and the parameters hardcoded
 
 ### A note about the color gray
 
-A "pure gray" used as a midpoint will return the complement of the initial color. Example:
+A "pure gray" (midpoint(black,white) = midpoint(0x000000,0xffffff) = 0x808080) used as a midpoint will return the complement of the initial color. Example:
 
 <img src="/README_images/pureGrayCreatesComplement.png" width="300" />
 
-However, not every (gray) color is achievable as a blend of only two colors. Using a gray that is darker or lighter than the midpoint of white and black (0x808080) may not give an intended result. Based on my knowledge of additive color mixing, there is no remedy for this problem. Some examples:
+However, not every (gray) color is achievable as a blend of only two colors. Using a gray that is darker or lighter than "pure gray" may not give the intended result. As far as I know, there is no remedy to this problem, as it is a consequence of additive mixing of two colors. Some examples:
 
 <img src="/README_images/offGrayDarkCreatesMisc.png" width="300" />
 <img src="/README_images/offGrayLightCreatesMisc.png" width="300" />
