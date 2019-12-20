@@ -33,10 +33,13 @@ public class colorJumper_Swatches {
       FontMetrics textMetrics = g2.getFontMetrics();
       String text = "";
       
-      // Set sqaure and text colors
+      // Set sqaure and text colors. Text color is set to the complement
+      // of the square color unless the square color is gray.*
       Color square = new Color(r, g, b);
       Color label = new Color(255-r, 255-g, 255-b);
       g2.setColor(square);
+      if ((r < 0xCC & r > 0x33) && (g < 0xCC & g > 0x33) && (b < 0xCC & b > 0x33))
+         label = Color.white;
       
       // Set text String
       String rString = String.format("%02X", r);
@@ -80,7 +83,14 @@ public class colorJumper_Swatches {
                         int b = 0;
                         String type = "";
                         
-                        HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
+                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
+                        //HexColorJumper jump = new HexColorJumper("#FFFF00", "#FF8080");
+                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#333333"); //????
+                        
+                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#7F7F7F");
+                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#80807e");
+                        
+                        HexColorJumper jump = new HexColorJumper("#FF0000", "#DDDDDD");
                         String c = jump.calculate(jump.getC1(), jump.getC2());
                       
                         r = jump.getR1_int();
