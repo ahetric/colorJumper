@@ -1,28 +1,23 @@
-import java.lang.Math;
 /*
- * The opposite of a hex color blender. Typical color blenders
- * take the midpoint of two extreme colors. For example, midpoint
- * of Black and White is Gray. This program takes two colors,
- * one extreme like White and one midpoint like Gray, and finds
- * the other extreme, like Black.
- *
- * Color 1 must be the extreme color, color 2 must be the midpoint.
- * Output is the other extreme that blends with Color 1 to produce
- * color 2.
- *
- * Example usage:
- *  String c1 = "#FFFF00"; // Yellow
- *  String c2 = "#FF8080"; // Magenta
- *     //Result: #FF8080   // Salmon
- *
- * Note: if color is way off, try changing sign of: xfinal = (xtemp+x2_int)
- * It may just be going the "wrong direction"
+ * @author Amelia Hetrick
+ * Last Updated: Dec 20 2019
  */
+
+import java.lang.Math;
 
 public class HexColorJumper {
 
    private static String c1;
    private static String c2;
+   private static int r1_int;
+   private static int r2_int;
+   private static int rfinal;
+   private static int g1_int;
+   private static int g2_int;
+   private static int gfinal;
+   private static int b1_int;
+   private static int b2_int;
+   private static int bfinal;
    
    // Constructor
    public HexColorJumper() {
@@ -35,24 +30,69 @@ public class HexColorJumper {
       c2 = color2;
    }
    
-   // Setter for C1
+   // Setter for c1
    public void setC1(String color1) {
       c1 = color1;
    }
    
-   // Setter for C2
+   // Setter for c2
    public void setC2(String color2) {
       c2 = color2;
    }
    
-   // Getter for C1
+   // Getter for c1
    public String getC1() {
       return c1;
    }
    
-   // Getter for C2
+   // Getter for c2
    public String getC2() {
       return c2;
+   }
+   
+   // Getter for r1_int
+   public int getR1_int() {
+      return r1_int;
+   }
+   
+   // Getter for r2_int
+   public int getR2_int() {
+      return r2_int;
+   }
+   
+   // Getter for rfinal
+   public int getRfinal() {
+      return rfinal;
+   }
+   
+   // Getter for g1_int
+   public int getG1_int() {
+      return g1_int;
+   }
+   
+   // Getter for g2_int
+   public int getG2_int() {
+      return g2_int;
+   }
+   
+   // Getter for gfinal
+   public int getGfinal() {
+      return gfinal;
+   }
+   
+   // Getter for b1_int
+   public int getB1_int() {
+      return b1_int;
+   }
+   
+   // Getter for b2_int
+   public int getB2_int() {
+      return b2_int;
+   }
+   
+   // Getter for bfinal
+   public int getBfinal() {
+      return bfinal;
    }
    
    // Adjust Edge Cases
@@ -70,8 +110,8 @@ public class HexColorJumper {
         else if (rgbtemp == 0x7F)
             rgbtemp = 0x80;
         
-        int sign = (rgbtemp+rgb2_int);
-        System.out.println(sign);
+        //int sign = (rgbtemp+rgb2_int);
+        //System.out.println(sign);
         int rgbfinal;
         if (rgb2_int >= rgb1_int)
             rgbfinal = Math.abs((rgbtemp+rgb2_int))%0x100;
@@ -96,12 +136,12 @@ public class HexColorJumper {
         String b2 = c2.substring(5,7);
         
         // Convert RGB Strings of each color to ints
-        int r1_int = Integer.parseInt(r1, 16);
-        int r2_int = Integer.parseInt(r2, 16);
-        int g1_int = Integer.parseInt(g1, 16);
-        int g2_int = Integer.parseInt(g2, 16);
-        int b1_int = Integer.parseInt(b1, 16);
-        int b2_int = Integer.parseInt(b2, 16);
+        r1_int = Integer.parseInt(r1, 16);
+        r2_int = Integer.parseInt(r2, 16);
+        g1_int = Integer.parseInt(g1, 16);
+        g2_int = Integer.parseInt(g2, 16);
+        b1_int = Integer.parseInt(b1, 16);
+        b2_int = Integer.parseInt(b2, 16);
         
         // Adjust for edge cases
         r1_int = adjustEdgeCases(r1_int);
@@ -112,9 +152,9 @@ public class HexColorJumper {
         b2_int = adjustEdgeCases(b2_int);
 
         // Calculate new R, G, and B; adjust for edge cases
-        int rfinal = calculateRGB(r1_int, r2_int);
-        int gfinal = calculateRGB(g1_int, g2_int);
-        int bfinal = calculateRGB(b1_int, b2_int);
+        rfinal = calculateRGB(r1_int, r2_int);
+        gfinal = calculateRGB(g1_int, g2_int);
+        bfinal = calculateRGB(b1_int, b2_int);
         
         // Convert new R, G, B to Strings for printing output
         String r = String.format("%02X", rfinal );
@@ -125,10 +165,9 @@ public class HexColorJumper {
         String c = "#" + r + g + b;
 
         // Print outputs
-        System.out.println("r1: " + r1 + ", r2: " + r2 + ", new R: " + String.format("%02X", rfinal ) );
+        /*System.out.println("r1: " + r1 + ", r2: " + r2 + ", new R: " + String.format("%02X", rfinal ) );
         System.out.println("g1: " + g1 + ", g2: " + g2 + ", new G: " + String.format("%02X", gfinal ) );
-        System.out.println("b1: " + b1 + ", b2: " + b2 + ", new B: " + String.format("%02X", bfinal ) );
-        //System.out.println("\n" + c);
+        System.out.println("b1: " + b1 + ", b2: " + b2 + ", new B: " + String.format("%02X", bfinal ) );*/
         
         return c;
    
@@ -137,9 +176,9 @@ public class HexColorJumper {
    
    
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
-        String c = calculate(c1, c2);
+        String c = jump.calculate(c1, c2);
         System.out.println("\n" + c);
-    }
+    }*/
 }
