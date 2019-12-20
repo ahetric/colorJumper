@@ -9,16 +9,16 @@ For example, color blenders behave like this:
 
 Parameter 1 | Result | Parameter 2
 ----------- | ------ | -----------
-"Extreme" color 1 | Midpoint | "Extreme" color 2
+Color 1 | Midpoint | Color 2
 White | Black | Gray
 
-![A visual representation of the above table][colorBlenders]
+![A visual representation of the above table](/README_images/colorBlenders.png | width=300)
 
 However, colorJumper behaves like this:
 
 Parameter 1 | Parameter 2 | Result
 ----------- | ----------- | ------
-"Extreme" color 1 | Midpoint | "Extreme" color 2
+Color 1 | Midpoint | Color 2
 White | Gray | Black
 
 ![A visual representation of the above table][colorJumper]
