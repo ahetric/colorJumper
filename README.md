@@ -1,7 +1,6 @@
 # colorJumper
 
-_Current support for hexadecimal representation of colors only._  
-_Be wary of grays used as midpoint colors: While you can find a color's complement using a pure gray (0x080808) as a midpoint, other grays may not give intended results. Not every (gray) color is achievable as a blend of only two colors._
+### What is colorJumper?
 
 colorJumper works as a counterpart to a color blender. There are many color blenders available that return the midpoint of two color values. colorJumper takes two colors - an **initial color** and a **midpoint color** - and returns a **result** such that the midpoint of the **initial color** and the **result** is equal to the **midpoint color**.
 
@@ -20,6 +19,25 @@ Parameter 1 | Parameter 2 | Result | Calculation
 Color1      | Midpoint    | Color2 | `Result = Color2 such that Midpoint = midpoint(Color1,Color2)`
 
 <img src="/README_images/colorJumper.png" width="300" />
+
+---
+
+### How to run
+
+For now, run colorJumper_Swatches.java with no CLI, and the parameters hardcoded in the main method. I have plans to allow for CLI in the near future. Additionally, there is current support for hexadecimal representation of colors only.
+
+---
+
+### A note about the color gray
+
+A "pure gray" used as a midpoint will return the complement of the initial color. Example:
+
+<img src="/README_images/pureGrayCreatesComplement.png" width="300" />
+
+However, not every (gray) color is achievable as a blend of only two colors. Using a gray that is darker or lighter than the midpoint of white and black (0x808080) may not give an intended result. Based on my knowledge of additive color mixing, there is no remedy for this problem. Some examples:
+
+<img src="/README_images/offGrayDarkCreatesMisc.png" width="300" />
+<img src="/README_images/offGrayLightCreatesMisc.png" width="300" />
 
 ---
 
