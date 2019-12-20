@@ -10,7 +10,7 @@ For example, color blenders behave like this:
 Parameter 1 | Result   | Parameter 2 | Calculation
 ----------- | ------   | ----------- |:-----------
 Color 1     | Midpoint | Color 2     | `Result = midpoint(Color1,Color2)`
-White       | Gray     | Black       | `Result = Gray = midpoint(White , Black)`
+White       | Gray     | Black       | `Result = midpoint(White , Black) = Gray`
 
 <img src="/README_images/colorBlenders.png" width="300" />
 
@@ -18,8 +18,8 @@ However, colorJumper behaves like this:
 
 Parameter 1 | Parameter 2 | Result  | Calculation
 ----------- | ----------- | ------  | -----------:
-Color 1     | Midpoint    | Color 2 | `Result = Color2 such that Midpoint = midpoint(Color1,Color2)
-White       | Gray        | Black   | `Result = Black such that Gray = midpoint(White , Black)
+Color 1     | Midpoint    | Color 2 | `Result = Color2 such that Midpoint = midpoint(Color1,Color2)`
+White       | Gray        | Black   | `Result = Black such that Gray = midpoint(White , Black)`
 
 <img src="/README_images/colorJumper.png" width="300" />
 
