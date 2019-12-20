@@ -3,11 +3,7 @@
 _Current support for hexadecimal representation of colors only._  
 _Be wary of grays used as midpoint colors: While you can find a color's complement using a pure gray (0x080808) as a midpoint, other grays may not give intended results. Not every (gray) color is achievable as a blend of only two colors._
 
-colorJumper works as a counterpart to a color blender. There are many color blenders available that return the midpoint of two color values. 
-
-colorJumper takes two colors - an *initial color* and a *midpoint color* - and returns a *result* such that the midpoint of the *initial color* and the *result* is equal to the *midpoint color*.
-
-colorJumper takes two colors - one "extreme" color and one "midpoint" - and returns a result, such that the midpoint of the initial "extreme" color and the result is equal to the initial "midpoint" input.
+colorJumper works as a counterpart to a color blender. There are many color blenders available that return the midpoint of two color values. colorJumper takes two colors - an **initial color** and a **midpoint color** - and returns a **result** such that the midpoint of the **initial color** and the **result** is equal to the **midpoint color**.
 
 For example, color blenders behave like this:
 
