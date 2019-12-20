@@ -19,7 +19,8 @@ public class HexColorJumperTest {
    public void test1() {
       tester.setC1("#FFFF00");
       tester.setC2("#FF8080");
-      String expected = "#FF00FF";
+      String expected = "#FF00FF"; //comment out else if 7f then 80
+      //String expected = "#FF01FF";
       String actual = tester.calculate(tester.getC1(), tester.getC2());
       Assert.assertEquals(expected, actual);
    }
@@ -30,6 +31,7 @@ public class HexColorJumperTest {
       tester.setC1("#FF00FF");
       tester.setC2("#FF8080");
       String expected = "#FFFF00";
+      //String expected = "#FFFF01";
       String actual = tester.calculate(tester.getC1(), tester.getC2());
       Assert.assertEquals(expected, actual);
    }
@@ -40,6 +42,7 @@ public class HexColorJumperTest {
       tester.setC1("#FFFFFF");
       tester.setC2("#7F7F7F");
       String expected = "#000000";
+      //String expected = "#010101";
       String actual = tester.calculate(tester.getC1(), tester.getC2());
       Assert.assertEquals(expected, actual);
    }
