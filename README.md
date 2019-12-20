@@ -1,6 +1,6 @@
 # colorJumper
 
-_Current support for hexadecimal representation of colors only._ /
+_Current support for hexadecimal representation of colors only._  
 _Be wary of grays used as midpoint colors: While you can find a color's complement using a pure gray (0x080808) as a midpoint, other grays may not give intended results. Not every (gray) color is achievable as a blend of only two colors._
 
 colorJumper works as the opposite of a color blender. There are many color blenders available that take two colors and return the midpoint of their RBG values. colorJumper takes two colors - one "extreme" color and one "midpoint" - and returns a result, such that the midpoint of the initial "extreme" color and the result is equal to the initial "midpoint" input.
@@ -21,7 +21,7 @@ Parameter 1 | Parameter 2 | Result
 Color 1 | Midpoint | Color 2
 White | Gray | Black
 
-<img src=[colorJumper] width="300" />
+<img src="/README_images/colorJumper.png" width="300" />
 
 ---
 
@@ -39,8 +39,6 @@ Method for handling new lines with Java Graphics2D drawString by [Andreas Lundbl
 
 
 
-[colorBlenders]: /README_images/colorBlenders.png
-[colorJumper]: /README_images/colorJumper.png
 
 [Valentin Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
 [Eric A. Meyer's Color Blender]: https://meyerweb.com/eric/tools/color-blend/
