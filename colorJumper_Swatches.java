@@ -17,11 +17,14 @@ public class colorJumper_Swatches {
       // Set location and size of square
       int x = padSize;
       if (type == "Extreme") {
+      //if (type == "Color 1") {
       }  
       else if (type == "Midpoint") {
+      //else if (type == "Result") {
          x = squareSize + padSize;             
       }
       else if (type == "Result") {
+      //else if (type == "Color 2") {
          x = squareSize*2 + padSize;
       }
       int y = padSize;
@@ -33,13 +36,18 @@ public class colorJumper_Swatches {
       FontMetrics textMetrics = g2.getFontMetrics();
       String text = "";
       
-      // Set sqaure and text colors. Text color is set to the complement
-      // of the square color unless the square color is gray.*
+      // Set sqaure and text colors. Text color is set to white unless the square
+      // color is itself close to white. (Then text color is set to black).
       Color square = new Color(r, g, b);
       Color label = new Color(255-r, 255-g, 255-b);
       g2.setColor(square);
-      if ((r < 0xCC & r > 0x33) && (g < 0xCC & g > 0x33) && (b < 0xCC & b > 0x33))
+      /*if ((r < 0xCC & r > 0x33) && (g < 0xCC & g > 0x33) && (b < 0xCC & b > 0x33))
+         label = Color.white;*/
+      if ((r > 0xBB) || (g > 0xBB) || (b > 0xBB))
+         label = Color.black;
+      else
          label = Color.white;
+      
       
       // Set text String
       String rString = String.format("%02X", r);
@@ -85,30 +93,35 @@ public class colorJumper_Swatches {
                         
                         //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
                         //HexColorJumper jump = new HexColorJumper("#FFFF00", "#FF8080");
-                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#333333"); //????
+                        //HexColorJumper jump = new HexColorJumper("#00FFFF", "#333333"); //????
                         
                         //HexColorJumper jump = new HexColorJumper("#FF0000", "#7F7F7F");
                         //HexColorJumper jump = new HexColorJumper("#FF0000", "#80807e");
                         
-                        HexColorJumper jump = new HexColorJumper("#FF0000", "#DDDDDD");
+                        HexColorJumper jump = new HexColorJumper("#FF0000", "#CCCCCC");
+                        
+                        //HexColorJumper jump = new HexColorJumper("#00FFFF", "#80B3FF");
                         String c = jump.calculate(jump.getC1(), jump.getC2());
                       
                         r = jump.getR1_int();
                         g = jump.getG1_int();
                         b = jump.getB1_int();
                         type = "Extreme";
+                        //type = "Color 1";
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         
                         r = jump.getR2_int();
                         g = jump.getG2_int();
                         b = jump.getB2_int();
                         type = "Midpoint";
+                        //type = "Result";
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         
                         r = jump.getRfinal();
                         g = jump.getGfinal();
                         b = jump.getBfinal();
                         type = "Result";
+                        //type = "Color 2";
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         
                         System.out.println("Result: " + c);
