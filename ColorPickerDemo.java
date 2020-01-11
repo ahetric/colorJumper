@@ -48,11 +48,6 @@ import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 
 
-//colorJumperSwatches
-//import javax.swing.*;
-//import java.awt.*;
-//import java.awt.geom.Rectangle2D;
-
 
 
  
@@ -63,6 +58,12 @@ public class ColorPickerDemo extends Application {
     private Text text;
     private Text text2;
     private Text text3;
+    private String init = "Initial\n";
+    private String midp = "Midpoint\n";
+    private String resu = "Result\n";
+    private String color1;
+    private String color2;
+    private String color3;
 
 
     private String ColorToHexString(Color color) {
@@ -70,7 +71,6 @@ public class ColorPickerDemo extends Application {
     (int)(color.getRed()*255),
     (int)(color.getGreen()*255),
     (int)(color.getBlue()*255));
-   
     }
 
    
@@ -91,6 +91,7 @@ public class ColorPickerDemo extends Application {
         
         final Rectangle square = new Rectangle(50,50,100,100);
         square.setFill(colorPicker.getValue());
+        //square.setStroke(Color.BLACK);
         
         final Rectangle square2 = new Rectangle(150,50,100,100);
         square2.setFill(colorPicker2.getValue());
@@ -100,18 +101,18 @@ public class ColorPickerDemo extends Application {
         
         //
         
-        String input1 = "Initial\n" + ColorToHexString(colorPicker.getValue());
-        text = new Text(input1);
+        color1 = ColorToHexString(colorPicker.getValue());
+        text = new Text(init + color1);
         text.setFill(Color.WHITE);
         text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         
-        String input2 = ColorToHexString(colorPicker2.getValue());
-        text2 = new Text(input2);
+        color2 = ColorToHexString(colorPicker2.getValue());
+        text2 = new Text(midp + color2);
         text2.setFill(Color.WHITE);
         text2.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         
-        String result = "# ?";
-        text3 = new Text(result);
+        color3 = "# ?";
+        text3 = new Text(resu + color3);
         text3.setFill(Color.WHITE);
         text3.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         
@@ -130,8 +131,8 @@ public class ColorPickerDemo extends Application {
             @Override
             public void handle(ActionEvent event) {
                 square.setFill(colorPicker.getValue());
-                String input1 = ColorToHexString(colorPicker.getValue());
-                text.setText(input1);
+                color1 = ColorToHexString(colorPicker.getValue());
+                text.setText(init + color1);
             }
         });
         
@@ -140,8 +141,8 @@ public class ColorPickerDemo extends Application {
             @Override
             public void handle(ActionEvent event) {
                 square2.setFill(colorPicker2.getValue());
-                String input2 = ColorToHexString(colorPicker2.getValue());
-                text2.setText(input2);
+                color2 = ColorToHexString(colorPicker2.getValue());
+                text2.setText(midp + color2);
             }
         });
         
@@ -157,17 +158,19 @@ public class ColorPickerDemo extends Application {
                 String input2 = ColorToHexString(colorPicker2.getValue());
                 
                 HexColorJumper jump = new HexColorJumper(input1, input2);
-                String c = jump.calculate(jump.getC1(), jump.getC2());
+                color3 = jump.calculate(jump.getC1(), jump.getC2());
                 
-                int r = jump.getRfinal();
+                /*int r = jump.getRfinal();
                 int g = jump.getGfinal();
                 int b = jump.getBfinal();
                 Color result = Color.rgb(r, g, b);
                 
-                square3.setFill(result);
+                square3.setFill(result);*/
+                square3.setFill(Color.web(color3));
                 
-                String input3 = c;
-                text3.setText(input3);
+                text3.setText(resu + color3);
+                
+                System.out.println("(" + input1 + ", " + input2 + "): " + color3);
             }
         });
         
