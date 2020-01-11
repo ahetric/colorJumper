@@ -20,7 +20,6 @@ public class colorJumper_Swatches {
       //if (type == "Color 1") {
       }  
       else if (type == "Midpoint") {
-      //else if (type == "Result") {
          x = squareSize + padSize;             
       }
       else if (type == "Result") {
@@ -68,7 +67,9 @@ public class colorJumper_Swatches {
    }
 
 
+
     public static void main(String[] args) {
+    
       SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -91,16 +92,15 @@ public class colorJumper_Swatches {
                         int b = 0;
                         String type = "";
                         
-                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
-                        //HexColorJumper jump = new HexColorJumper("#FFFF00", "#FF8080");
-                        //HexColorJumper jump = new HexColorJumper("#00FFFF", "#333333"); //????
                         
-                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#7F7F7F");
-                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#80807e");
                         
-                        //HexColorJumper jump = new HexColorJumper("#FF0000", "#CCCCCC");
+                        String arr[] = {""};
+                        ColorPickerSample.main(arr);
+                        String input1 = ColorPickerSample.getColorPickedInitial();
+                        String input2 = ColorPickerSample.getColorPickedMidpoint();
                         
-                        HexColorJumper jump = new HexColorJumper("#00FFFF", "#80B3FF");
+                       
+                        HexColorJumper jump = new HexColorJumper(input1, input2);
                         String c = jump.calculate(jump.getC1(), jump.getC2());
                       
                         r = jump.getR1_int();
@@ -114,7 +114,6 @@ public class colorJumper_Swatches {
                         g = jump.getG2_int();
                         b = jump.getB2_int();
                         type = "Midpoint";
-                        //type = "Result";
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         
                         r = jump.getRfinal();
@@ -125,6 +124,9 @@ public class colorJumper_Swatches {
                         paintThis(graph, squareSize, padSize, r, g, b, type);
                         
                         System.out.println("Result: " + c);
+                        
+                        //
+                        
                     }
                 }, BorderLayout.CENTER);
 

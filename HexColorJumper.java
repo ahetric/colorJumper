@@ -110,8 +110,6 @@ public class HexColorJumper {
         else if (rgbtemp == 0x7F)
             rgbtemp = 0x80;
         
-        //int sign = (rgbtemp+rgb2_int);
-        //System.out.println(sign);
         int rgbfinal;
         if (rgb2_int >= rgb1_int)
             rgbfinal = Math.abs((rgbtemp+rgb2_int))%0x100;
