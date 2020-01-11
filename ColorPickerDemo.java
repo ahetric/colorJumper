@@ -25,7 +25,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
-//import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -90,14 +89,14 @@ public class ColorPickerDemo extends Application {
         //
         
         
-        final Rectangle circle = new Rectangle(50,50,100,100);
-        circle.setFill(colorPicker.getValue());
+        final Rectangle square = new Rectangle(50,50,100,100);
+        square.setFill(colorPicker.getValue());
         
-        final Rectangle circle2 = new Rectangle(150,50,100,100);
-        circle2.setFill(colorPicker2.getValue());
+        final Rectangle square2 = new Rectangle(150,50,100,100);
+        square2.setFill(colorPicker2.getValue());
         
-        final Rectangle circle3 = new Rectangle(250,50,100,100);
-        circle3.setFill(Color.BLACK);
+        final Rectangle square3 = new Rectangle(250,50,100,100);
+        square3.setFill(Color.BLACK);
         
         //
         
@@ -130,7 +129,7 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-                circle.setFill(colorPicker.getValue());
+                square.setFill(colorPicker.getValue());
                 String input1 = ColorToHexString(colorPicker.getValue());
                 text.setText(input1);
             }
@@ -140,7 +139,7 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-                circle2.setFill(colorPicker2.getValue());
+                square2.setFill(colorPicker2.getValue());
                 String input2 = ColorToHexString(colorPicker2.getValue());
                 text2.setText(input2);
             }
@@ -165,7 +164,7 @@ public class ColorPickerDemo extends Application {
                 int b = jump.getBfinal();
                 Color result = Color.rgb(r, g, b);
                 
-                circle3.setFill(result);
+                square3.setFill(result);
                 
                 String input3 = c;
                 text3.setText(input3);
@@ -176,9 +175,9 @@ public class ColorPickerDemo extends Application {
         /*FlowPane root = new FlowPane();
         root.setPadding(new Insets(10));
         root.setHgap(10);
-        root.getChildren().add(circle);
-        root.getChildren().add(circle2);
-        root.getChildren().add(circle3);
+        root.getChildren().add(square);
+        root.getChildren().add(square2);
+        root.getChildren().add(square3);
         root.getChildren().add(initialLabel);
         root.getChildren().add(colorPicker);
         root.getChildren().add(midpointLabel); 
@@ -186,9 +185,9 @@ public class ColorPickerDemo extends Application {
         root.getChildren().add(button);*/
         
         /*Group root = new Group();
-        root.getChildren().add(circle);
-        root.getChildren().add(circle2);
-        root.getChildren().add(circle3);
+        root.getChildren().add(square);
+        root.getChildren().add(square2);
+        root.getChildren().add(square3);
         root.getChildren().add(initialLabel);
         root.getChildren().add(colorPicker);
         root.getChildren().add(midpointLabel); 
@@ -199,22 +198,22 @@ public class ColorPickerDemo extends Application {
         //hbox.setAlignment(Pos.BOTTOM_CENTER);
         root.getChildren().add(hbox);*/
         
-        StackPane firstCircle = new StackPane();
-        firstCircle.getChildren().add(circle);
-        firstCircle.getChildren().add(text);
+        StackPane firstSquare = new StackPane();
+        firstSquare.getChildren().add(square);
+        firstSquare.getChildren().add(text);
         
-        StackPane secondCircle = new StackPane();
-        secondCircle.getChildren().add(circle2);
-        secondCircle.getChildren().add(text2);
+        StackPane secondSquare = new StackPane();
+        secondSquare.getChildren().add(square2);
+        secondSquare.getChildren().add(text2);
         
-        StackPane thirdCircle = new StackPane();
-        thirdCircle.getChildren().add(circle3);
-        thirdCircle.getChildren().add(text3);
+        StackPane thirdSquare = new StackPane();
+        thirdSquare.getChildren().add(square3);
+        thirdSquare.getChildren().add(text3);
         
         FlowPane root = new FlowPane();
-        root.getChildren().add(firstCircle);
-        root.getChildren().add(secondCircle);
-        root.getChildren().add(thirdCircle);
+        root.getChildren().add(firstSquare);
+        root.getChildren().add(secondSquare);
+        root.getChildren().add(thirdSquare);
         //
         root.getChildren().add(initialLabel);
         root.getChildren().add(colorPicker);
