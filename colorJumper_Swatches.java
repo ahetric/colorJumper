@@ -40,8 +40,6 @@ public class colorJumper_Swatches {
       Color square = new Color(r, g, b);
       Color label = new Color(255-r, 255-g, 255-b);
       g2.setColor(square);
-      /*if ((r < 0xCC & r > 0x33) && (g < 0xCC & g > 0x33) && (b < 0xCC & b > 0x33))
-         label = Color.white;*/
       if ((r > 0xBB) || (g > 0xBB) || (b > 0xBB))
          label = Color.black;
       else
