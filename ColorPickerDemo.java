@@ -64,6 +64,8 @@ public class ColorPickerDemo extends Application {
     private String color1;
     private String color2;
     private String color3;
+    private int squareSize = 100;
+    private int padSize = 25;
 
 
     private String ColorToHexString(Color color) {
@@ -89,14 +91,14 @@ public class ColorPickerDemo extends Application {
         //
         
         
-        final Rectangle square = new Rectangle(50,50,100,100);
+        final Rectangle square = new Rectangle(squareSize,squareSize);
         square.setFill(colorPicker.getValue());
         //square.setStroke(Color.BLACK);
         
-        final Rectangle square2 = new Rectangle(150,50,100,100);
+        final Rectangle square2 = new Rectangle(squareSize,squareSize);
         square2.setFill(colorPicker2.getValue());
         
-        final Rectangle square3 = new Rectangle(250,50,100,100);
+        final Rectangle square3 = new Rectangle(squareSize,squareSize);
         square3.setFill(Color.BLACK);
         
         //
@@ -115,11 +117,6 @@ public class ColorPickerDemo extends Application {
         text3 = new Text(resu + color3);
         text3.setFill(Color.WHITE);
         text3.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-        
-        //
-        
-        Label initialLabel  = new Label("\nPick an initial color:");
-        Label midpointLabel = new Label("\nPick a midpoint color:"); 
         
         //
  
@@ -148,7 +145,7 @@ public class ColorPickerDemo extends Application {
         
         //
         
-        Button button = new Button("Go");
+        Button button = new Button("Get Result");
         
         button.setOnAction(new EventHandler<ActionEvent>() {
  
@@ -160,12 +157,6 @@ public class ColorPickerDemo extends Application {
                 HexColorJumper jump = new HexColorJumper(input1, input2);
                 color3 = jump.calculate(jump.getC1(), jump.getC2());
                 
-                /*int r = jump.getRfinal();
-                int g = jump.getGfinal();
-                int b = jump.getBfinal();
-                Color result = Color.rgb(r, g, b);
-                
-                square3.setFill(result);*/
                 square3.setFill(Color.web(color3));
                 
                 text3.setText(resu + color3);
@@ -175,60 +166,53 @@ public class ColorPickerDemo extends Application {
         });
         
  
-        /*FlowPane root = new FlowPane();
-        root.setPadding(new Insets(10));
-        root.setHgap(10);
-        root.getChildren().add(square);
-        root.getChildren().add(square2);
-        root.getChildren().add(square3);
-        root.getChildren().add(initialLabel);
-        root.getChildren().add(colorPicker);
-        root.getChildren().add(midpointLabel); 
-        root.getChildren().add(colorPicker2);
-        root.getChildren().add(button);*/
-        
-        /*Group root = new Group();
-        root.getChildren().add(square);
-        root.getChildren().add(square2);
-        root.getChildren().add(square3);
-        root.getChildren().add(initialLabel);
-        root.getChildren().add(colorPicker);
-        root.getChildren().add(midpointLabel); 
-        root.getChildren().add(colorPicker2);
-        root.getChildren().add(button);
-        final Rectangle buttonsLayout = new Rectangle(50,200,100,100);
-        HBox hbox = new HBox(10, colorPicker, colorPicker2, button);
-        //hbox.setAlignment(Pos.BOTTOM_CENTER);
-        root.getChildren().add(hbox);*/
-        
         StackPane firstSquare = new StackPane();
         firstSquare.getChildren().add(square);
         firstSquare.getChildren().add(text);
+        firstSquare.setTranslateX(padSize);
+        firstSquare.setTranslateY(padSize);
         
         StackPane secondSquare = new StackPane();
         secondSquare.getChildren().add(square2);
         secondSquare.getChildren().add(text2);
+        secondSquare.setTranslateX(padSize);
+        secondSquare.setTranslateY(padSize);
         
         StackPane thirdSquare = new StackPane();
         thirdSquare.getChildren().add(square3);
         thirdSquare.getChildren().add(text3);
+        thirdSquare.setTranslateX(padSize);
+        thirdSquare.setTranslateY(padSize);
+        
+        colorPicker.setMinWidth(squareSize);
+        colorPicker.setMaxWidth(squareSize);
+        colorPicker.getStyleClass().add("button");
+        colorPicker2.setMinWidth(squareSize);
+        colorPicker2.setMaxWidth(squareSize);
+        colorPicker2.getStyleClass().add("button");
+        button.setMinWidth(squareSize);
+        button.setMaxWidth(squareSize);
+        
+        HBox buttons = new HBox();
+        buttons.getChildren().add(colorPicker);
+        buttons.getChildren().add(colorPicker2);
+        buttons.getChildren().add(button);
+        buttons.setTranslateX(padSize);
+        buttons.setTranslateY(padSize);
         
         FlowPane root = new FlowPane();
         root.getChildren().add(firstSquare);
         root.getChildren().add(secondSquare);
         root.getChildren().add(thirdSquare);
-        //
-        root.getChildren().add(initialLabel);
-        root.getChildren().add(colorPicker);
-        root.getChildren().add(midpointLabel); 
-        root.getChildren().add(colorPicker2);
-        root.getChildren().add(button);
+        root.getChildren().add(buttons);
         
         //
  
-        Scene scene = new Scene(root, 400, 300);
+        int sceneWidth = (squareSize*3 + padSize*2);
+        int sceneHeight = (squareSize + (padSize*2 + padSize/2));
+        Scene scene = new Scene(root, sceneWidth, sceneHeight + 15);
  
-        stage.setTitle("JavaFX ColorPicker (o7planning.org)");
+        stage.setTitle("colorJumper GUI");
  
         stage.setScene(scene);
         stage.show();
