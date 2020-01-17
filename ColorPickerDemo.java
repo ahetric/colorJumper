@@ -246,7 +246,11 @@ public class ColorPickerDemo extends Application {
         buttons.setTranslateY(padSize);
         
         HBox randomize = new HBox();
+        dice.setMinWidth(squareSize);
+        dice.setMaxWidth(squareSize);
         randomize.getChildren().add(dice);
+        randomize.setTranslateX(squareSize + padSize);
+        randomize.setTranslateY(padSize*1.5);
         
         FlowPane root = new FlowPane();
         root.getChildren().add(firstSquare);
@@ -259,7 +263,7 @@ public class ColorPickerDemo extends Application {
  
         int sceneWidth = (squareSize*3 + padSize*2);
         int sceneHeight = (squareSize + (padSize*2 + padSize/2));
-        Scene scene = new Scene(root, sceneWidth, sceneHeight + 15);
+        Scene scene = new Scene(root, sceneWidth, sceneHeight + 15 + 25);
  
         stage.setTitle("colorJumper GUI");
  
