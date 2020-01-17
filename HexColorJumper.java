@@ -95,6 +95,59 @@ public class HexColorJumper {
       return bfinal;
    }
    
+   public int getRGB(String mode, int number) {
+      switch(mode) {
+         case "R":
+            switch(number) {
+               case 1:
+                  return r1_int;
+               case 2:
+                  return r2_int;
+               case 3:
+                  return rfinal;
+            }
+         case "G":
+            switch(number) {
+               case 1:
+                  return g1_int;
+               case 2:
+                  return g2_int;
+               case 3:
+                  return gfinal;
+            }
+         case "B":
+            switch(number) {
+               case 1:
+                  return b1_int;
+               case 2:
+                  return b2_int;
+               case 3:
+                  return bfinal;
+            }
+      }
+      return 0x00;
+   }
+   
+   public static void updateInputColors() {
+      // Extract RGB of color 1
+        String r1 = c1.substring(1,3);
+        String g1 = c1.substring(3,5);
+        String b1 = c1.substring(5,7);
+        
+        // Extract RGB of color 2
+        String r2 = c2.substring(1,3);
+        String g2 = c2.substring(3,5);
+        String b2 = c2.substring(5,7);
+        
+        // Convert RGB Strings of each color to ints
+        r1_int = Integer.parseInt(r1, 16);
+        r2_int = Integer.parseInt(r2, 16);
+        g1_int = Integer.parseInt(g1, 16);
+        g2_int = Integer.parseInt(g2, 16);
+        b1_int = Integer.parseInt(b1, 16);
+        b2_int = Integer.parseInt(b2, 16);
+   }
+   
    // Adjust Edge Cases
    private static int adjustEdgeCases(int rgb) {
       if (rgb == 0x7F)
@@ -124,7 +177,7 @@ public class HexColorJumper {
    public static String calculate(String c1, String c2) {
         
         // Extract RGB of color 1
-        String r1 = c1.substring(1,3);
+        /*String r1 = c1.substring(1,3);
         String g1 = c1.substring(3,5);
         String b1 = c1.substring(5,7);
         
@@ -139,7 +192,8 @@ public class HexColorJumper {
         g1_int = Integer.parseInt(g1, 16);
         g2_int = Integer.parseInt(g2, 16);
         b1_int = Integer.parseInt(b1, 16);
-        b2_int = Integer.parseInt(b2, 16);
+        b2_int = Integer.parseInt(b2, 16);*/
+        updateInputColors();
         
         // Adjust for edge cases
         r1_int = adjustEdgeCases(r1_int);

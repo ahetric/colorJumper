@@ -55,9 +55,9 @@ public class ColorPickerDemo extends Application {
 
 
 
-    private Text text;
-    private Text text2;
-    private Text text3;
+    private Text text = new Text();
+    private Text text2 = new Text();
+    private Text text3 = new Text();
     private String init = "Initial\n";
     private String midp = "Midpoint\n";
     private String resu = "Result\n";
@@ -66,6 +66,14 @@ public class ColorPickerDemo extends Application {
     private String color3;
     private int squareSize = 100;
     private int padSize = 25;
+    
+    final Rectangle square = new Rectangle(squareSize,squareSize);
+    final Rectangle square2 = new Rectangle(squareSize,squareSize);
+    final Rectangle square3 = new Rectangle(squareSize,squareSize);
+    
+    Color text1Color = Color.WHITE;
+    Color text2Color = Color.WHITE;
+    Color text3Color = Color.WHITE;
 
 
     private String ColorToHexString(Color color) {
@@ -73,6 +81,21 @@ public class ColorPickerDemo extends Application {
     (int)(color.getRed()*255),
     (int)(color.getGreen()*255),
     (int)(color.getBlue()*255));
+    }
+    
+    private void updateSquare(Rectangle rect, Text text, String type, String squareColor, Color textColor) {
+       rect.setFill(Color.web(squareColor));
+       //rect.setStroke(Color.BLACK);
+       text.setText(type + squareColor);
+       text.setFill(textColor);
+       text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+    }
+    
+    private Color setTextColor(Text text, int r, int g, int b) {
+      if ((r > 0xBB) || (g > 0xBB) || (b > 0xBB)) {
+         return Color.BLACK;
+      }//else
+         return Color.WHITE;
     }
 
    
@@ -83,40 +106,26 @@ public class ColorPickerDemo extends Application {
     
     
         final ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setValue(Color.RED);
+        colorPicker.setValue(Color.WHITE);
         
         final ColorPicker colorPicker2 = new ColorPicker();
-        colorPicker2.setValue(Color.BLUE);
-        
-        //
-        
-        
-        final Rectangle square = new Rectangle(squareSize,squareSize);
-        square.setFill(colorPicker.getValue());
-        //square.setStroke(Color.BLACK);
-        
-        final Rectangle square2 = new Rectangle(squareSize,squareSize);
-        square2.setFill(colorPicker2.getValue());
-        
-        final Rectangle square3 = new Rectangle(squareSize,squareSize);
-        square3.setFill(Color.BLACK);
+        colorPicker2.setValue(Color.PINK);
         
         //
         
         color1 = ColorToHexString(colorPicker.getValue());
-        text = new Text(init + color1);
-        text.setFill(Color.WHITE);
-        text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-        
         color2 = ColorToHexString(colorPicker2.getValue());
-        text2 = new Text(midp + color2);
-        text2.setFill(Color.WHITE);
-        text2.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         
-        color3 = "# ?";
-        text3 = new Text(resu + color3);
-        text3.setFill(Color.WHITE);
-        text3.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        HexColorJumper jump = new HexColorJumper(color1, color2);
+        color3 = jump.calculate(color1, color2);
+        
+        
+        text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+        text2Color = setTextColor(text2, jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
+        text3Color = setTextColor(text3, jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
+        updateSquare(square, text, init, color1, text1Color);
+        updateSquare(square2, text2, midp, color2, text2Color);
+        updateSquare(square3, text3, resu, color3, text3Color);
         
         //
  
@@ -127,9 +136,11 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-                square.setFill(colorPicker.getValue());
                 color1 = ColorToHexString(colorPicker.getValue());
-                text.setText(init + color1);
+                jump.setC1(color1);
+                jump.updateInputColors();
+                text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                updateSquare(square, text, init, color1, text1Color);
             }
         });
         
@@ -137,9 +148,11 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-                square2.setFill(colorPicker2.getValue());
                 color2 = ColorToHexString(colorPicker2.getValue());
-                text2.setText(midp + color2);
+                jump.setC2(color2);
+                jump.updateInputColors();
+                text2Color = setTextColor(text2, jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
+                updateSquare(square2, text2, midp, color2, text2Color);
             }
         });
         
@@ -151,17 +164,13 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-                String input1 = ColorToHexString(colorPicker.getValue());
-                String input2 = ColorToHexString(colorPicker2.getValue());
+                //HexColorJumper jump = new HexColorJumper();
+                color3 = jump.calculate(color1, color2);
                 
-                HexColorJumper jump = new HexColorJumper(input1, input2);
-                color3 = jump.calculate(jump.getC1(), jump.getC2());
+                text3Color = setTextColor(text3, jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
+                updateSquare(square3, text3, resu, color3, text3Color);
                 
-                square3.setFill(Color.web(color3));
-                
-                text3.setText(resu + color3);
-                
-                System.out.println("(" + input1 + ", " + input2 + "): " + color3);
+                System.out.println("(" + color1 + ", " + color2 + "): " + color3);
             }
         });
         
