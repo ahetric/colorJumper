@@ -106,10 +106,11 @@ public class ColorPickerDemo extends Application {
     
     
         final ColorPicker colorPicker = new ColorPicker();
-        colorPicker.setValue(Color.WHITE);
+        Color initialColor = Color.color(Math.random(), Math.random(), Math.random());
+        colorPicker.setValue(initialColor);
         
         final ColorPicker colorPicker2 = new ColorPicker();
-        colorPicker2.setValue(Color.PINK);
+        colorPicker2.setValue(initialColor.darker());
         
         //
         
