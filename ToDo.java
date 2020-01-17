@@ -3,7 +3,8 @@ public class ToDo {
 - change square label text to black when color too light (done, but make this cooler)
 - center the square label text
 - move square label text to bottom-ish
-- choose pretty default colors
+- choose pretty default colors (add dice option to shuffle initial colors) [fix efficiency of this, place button better]
+- add a "get complement" option, which keeps initial color same and sets midpoint to #808080
 - center the colorPicker text
 - add (r,g,b) values to text
 

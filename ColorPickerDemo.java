@@ -175,6 +175,41 @@ public class ColorPickerDemo extends Application {
             }
         });
         
+        
+        
+        
+        //
+        
+        Button dice = new Button("Shuffle");
+        
+        dice.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                Color initialColor = Color.color(Math.random(), Math.random(), Math.random());
+                colorPicker.setValue(initialColor);
+                colorPicker2.setValue(initialColor.darker());
+                
+                color1 = ColorToHexString(initialColor);
+                color2 = ColorToHexString(initialColor.darker());
+                
+                jump.setC1(color1);
+                jump.setC2(color2);
+                color3 = jump.calculate(color1, color2);
+                
+                text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                updateSquare(square, text, init, color1, text1Color);
+                text2Color = setTextColor(text2, jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
+                updateSquare(square2, text2, midp, color2, text2Color);
+                text3Color = setTextColor(text3, jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
+                updateSquare(square3, text3, resu, color3, text3Color);
+                
+                System.out.println("(" + color1 + ", " + color2 + "): " + color3);
+            }
+        });
+        
+        //
+        
  
         StackPane firstSquare = new StackPane();
         firstSquare.getChildren().add(square);
@@ -210,11 +245,15 @@ public class ColorPickerDemo extends Application {
         buttons.setTranslateX(padSize);
         buttons.setTranslateY(padSize);
         
+        HBox randomize = new HBox();
+        randomize.getChildren().add(dice);
+        
         FlowPane root = new FlowPane();
         root.getChildren().add(firstSquare);
         root.getChildren().add(secondSquare);
         root.getChildren().add(thirdSquare);
         root.getChildren().add(buttons);
+        root.getChildren().add(randomize);
         
         //
  
