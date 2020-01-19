@@ -74,6 +74,8 @@ public class ColorPickerDemo extends Application {
     Color text1Color = Color.WHITE;
     Color text2Color = Color.WHITE;
     Color text3Color = Color.WHITE;
+    
+    HexColorJumper jump = new HexColorJumper();
 
 
     private String ColorToHexString(Color color) {
@@ -83,19 +85,38 @@ public class ColorPickerDemo extends Application {
     (int)(color.getBlue()*255));
     }
     
-    private void updateSquare(Rectangle rect, Text text, String type, String squareColor, Color textColor) {
+    /*private void updateSquare(Rectangle rect, Text text, String type, String squareColor, Color textColor) {
        rect.setFill(Color.web(squareColor));
        //rect.setStroke(Color.BLACK);
        text.setText(type + squareColor);
        text.setFill(textColor);
        text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+    }*/
+    
+    private void updateSquare(Rectangle rect, Text text, String type, String squareColor, Color textColor) {
+       rect.setFill(Color.web(squareColor));
+       //rect.setStroke(Color.BLACK);
+       
+       int num = 1;
+       
+       if (type.equals(midp)) {
+            num = 2;
+       }
+       else if (type.equals(resu)) {
+            num = 3;
+       }
+       
+       text.setText(type + squareColor + "\n(" + jump.getRGB("R",num) + ", " + jump.getRGB("G",num) + ", " + jump.getRGB("B",num) + ")");
+       text.setFill(textColor);
+       text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
     }
     
     private Color setTextColor(Text text, int r, int g, int b) {
-      if ((r > 0xBB) || (g > 0xBB) || (b > 0xBB)) {
-         return Color.BLACK;
-      }//else
-         return Color.WHITE;
+      // https://stackoverflow.com/a/46470178
+      // https://harthur.github.io/brain/
+      int yiq = ( (r * 299) + (g * 587) + (b * 114) ) / 1000;
+      //return (yiq >= 128) ? Color.BLACK : Color.WHITE;
+      return (yiq >= 186) ? Color.BLACK : Color.WHITE;
     }
 
    
@@ -117,7 +138,9 @@ public class ColorPickerDemo extends Application {
         color1 = ColorToHexString(colorPicker.getValue());
         color2 = ColorToHexString(colorPicker2.getValue());
         
-        HexColorJumper jump = new HexColorJumper(color1, color2);
+        //HexColorJumper jump = new HexColorJumper(color1, color2);
+        jump.setC1(color1);
+        jump.setC2(color2);
         color3 = jump.calculate(color1, color2);
         
         
@@ -188,16 +211,24 @@ public class ColorPickerDemo extends Application {
             public void handle(ActionEvent event) {
                 Color initialColor = Color.color(Math.random(), Math.random(), Math.random());
                 colorPicker.setValue(initialColor);
-                colorPicker2.setValue(initialColor.darker());
-                
                 color1 = ColorToHexString(initialColor);
-                color2 = ColorToHexString(initialColor.darker());
+                text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                //updateSquare(square, text, init, color1, text1Color);
+                
+                if (text1Color.equals(Color.WHITE)) {
+                     colorPicker2.setValue(initialColor.brighter());
+                     color2 = ColorToHexString(initialColor.brighter());
+                }
+                else {
+                     colorPicker2.setValue(initialColor.darker());
+                     color2 = ColorToHexString(initialColor.darker());
+                }
                 
                 jump.setC1(color1);
                 jump.setC2(color2);
                 color3 = jump.calculate(color1, color2);
                 
-                text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                //text1Color = setTextColor(text, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
                 updateSquare(square, text, init, color1, text1Color);
                 text2Color = setTextColor(text2, jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
                 updateSquare(square2, text2, midp, color2, text2Color);
@@ -209,6 +240,14 @@ public class ColorPickerDemo extends Application {
         });
         
         //
+        
+        text.setTextAlignment(TextAlignment.CENTER);
+        text2.setTextAlignment(TextAlignment.CENTER);
+        text3.setTextAlignment(TextAlignment.CENTER);
+        
+        text.setTranslateY(padSize);
+        text2.setTranslateY(padSize);
+        text3.setTranslateY(padSize);
         
  
         StackPane firstSquare = new StackPane();

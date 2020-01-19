@@ -164,10 +164,14 @@ public class HexColorJumper {
             rgbtemp = 0x80;
         
         int rgbfinal;
-        if (rgb2_int >= rgb1_int)
+        /*if (rgb2_int >= rgb1_int)
             rgbfinal = Math.abs((rgbtemp+rgb2_int))%0x100;
         else
-            rgbfinal = Math.abs((rgbtemp-rgb2_int))%0x100;
+            rgbfinal = Math.abs((rgbtemp-rgb2_int))%0x100;*/
+        if (rgb2_int >= rgb1_int)
+            rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
+        else
+            rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);
         
         return rgbfinal;
    }
