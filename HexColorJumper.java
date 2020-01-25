@@ -19,6 +19,8 @@ public class HexColorJumper {
    private static int b2_int;
    private static int bfinal;
    
+   private static boolean withinBounds = true;
+   
    // Constructor
    public HexColorJumper() {
       // Purposefully empty
@@ -128,6 +130,10 @@ public class HexColorJumper {
       return 0x00;
    }
    
+   public boolean getWithinBounds() {
+      return withinBounds;
+   }
+   
    public static void updateInputColors() {
       // Extract RGB of color 1
         String r1 = c1.substring(1,3);
@@ -168,10 +174,20 @@ public class HexColorJumper {
             rgbfinal = Math.abs((rgbtemp+rgb2_int))%0x100;
         else
             rgbfinal = Math.abs((rgbtemp-rgb2_int))%0x100;*/
-        if (rgb2_int >= rgb1_int)
+        /*if (rgb2_int >= rgb1_int)
             rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
         else
-            rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);
+            rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);*/
+        if (rgb2_int >= rgb1_int)
+            rgbfinal = Math.abs((rgbtemp+rgb2_int));
+        else
+            rgbfinal = Math.abs((rgbtemp-rgb2_int));
+        
+        withinBounds = true;
+        if (rgbfinal > 0xFF || rgbfinal < 0x00)
+            withinBounds = false;
+        
+        rgbfinal = rgbfinal % 0x100;
         
         return rgbfinal;
    }
