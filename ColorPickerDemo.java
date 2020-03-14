@@ -44,14 +44,10 @@ import javafx.stage.Screen;
 
 //linear gradient
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.ToggleButton;
@@ -135,7 +131,7 @@ public class ColorPickerDemo extends Application {
        else if (type.equals(resu))
             num = 3;
        
-       text.setText(type + squareColor + "\n(" + jump.getRGB("R",num) + ", " + jump.getRGB("G",num) + ", " + jump.getRGB("B",num) + ")");
+       text.setText(type + squareColor + "\n(" + jump.getRGB('R',num) + ", " + jump.getRGB('G',num) + ", " + jump.getRGB('B',num) + ")");
        text.setFill(textColor);
        text.setFont(Font.font("Arial", FontWeight.BOLD, 12));
     }
@@ -192,7 +188,7 @@ public class ColorPickerDemo extends Application {
       //color1 = ColorToHexString(colorPicker1.getValue());
       jump.setC1(color1);
       jump.updateInputColors();
-      text1Color = yiqColorSpace(jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+      text1Color = yiqColorSpace(jump.getRGB('R',1), jump.getRGB('G',1), jump.getRGB('B',1));
       updateSquare(square1, text1, init, color1, text1Color);
                 
       buttonStyle(alert, true);
@@ -202,7 +198,7 @@ public class ColorPickerDemo extends Application {
       //color2 = ColorToHexString(colorPicker2.getValue());
       jump.setC2(color2);
       jump.updateInputColors();
-      text2Color = yiqColorSpace(jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
+      text2Color = yiqColorSpace(jump.getRGB('R',2), jump.getRGB('G',2), jump.getRGB('B',2));
       updateSquare(square2, text2, midp, color2, text2Color);
                 
       buttonStyle(alert, true);
@@ -216,7 +212,7 @@ public class ColorPickerDemo extends Application {
          buttonStyle(alert, false);
       }
                 
-      text3Color = yiqColorSpace(jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
+      text3Color = yiqColorSpace(jump.getRGB('R',3), jump.getRGB('G',3), jump.getRGB('B',3));
       updateSquare(square3, text3, resu, color3, text3Color);
                 
       System.out.println("(" + color1 + ", " + color2 + "): " + color3);
@@ -235,41 +231,69 @@ public class ColorPickerDemo extends Application {
     @Override
     public void start(Stage stage) {
     
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Set closure mode. Options: {ROLLOVER, STOP_AT_BOUND}
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         //jump.setClosure("STOP_AT_BOUND");
         jump.setClosure("ROLLOVER");
     
-        // Set up first color picker and the starting 'initial' color
+    
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Set up first color picker and the starting 'initial' color
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         final ColorPicker colorPicker1 = new ColorPicker();
         Color initialColor = Color.color(Math.random(), Math.random(), Math.random());
         colorPicker1.setValue(initialColor);
         
-        // Set up second color picker and the starting 'midpoint' color
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Set up second color picker and the starting 'midpoint' color
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         final ColorPicker colorPicker2 = new ColorPicker();
         if (yiqColorSpace((int)initialColor.getRed(), (int)initialColor.getGreen(), (int)initialColor.getBlue()) == Color.BLACK)
             colorPicker2.setValue(initialColor.darker());
         else
             colorPicker2.setValue(initialColor.brighter());
         
-        // Convert the Color objects to hexadecimal String format
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Convert the Color objects to hexadecimal String format
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         color1 = ColorToHexString(colorPicker1.getValue());
         color2 = ColorToHexString(colorPicker2.getValue());
         
-        // make sure that both starting colors of the HexColorJumper are initialized
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Make sure that both starting colors of the HexColorJumper are initialized
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         jump.setC1(color1);
         jump.setC2(color2);
         
-        // Set up the three main squares
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Set up the three main color squares
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         handleEventSquare1();
         handleEventSquare2();
         handleEventSquare3();
         
-        // Set up the "Get Result" button
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Set up the "Get Result" button
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         Button getResults = new Button("Get Result");
         
         
         
         
-        // Update elements of square1 when colorPicker1 Color is chosen
+        //
+        
+        
+        
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Update elements of square1 when colorPicker1 Color is chosen
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         colorPicker1.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -279,7 +303,10 @@ public class ColorPickerDemo extends Application {
             }
         });
         
-        // Update elements of square2 when colorPicker2 Color is chosen
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Update elements of square2 when colorPicker2 Color is chosen
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         colorPicker2.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -289,7 +316,10 @@ public class ColorPickerDemo extends Application {
             }
         });
         
-        // Update elements of square3 when "Get Result" button is pushed
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           Update elements of square3 when "Get Result" button is pushed
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         getResults.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -306,28 +336,42 @@ public class ColorPickerDemo extends Application {
         
         
         
-        
-        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           This section is for the 'alert' (!) and 'close' (X) notification bubbles that 
+           pop up on the top right corner of square 3 when the result of the
+           jumper operation was not closed under the set 0-255.
+           
+           Once the alert is toggled, the three color squares are overlayed by a similarly-sized
+           rectangle message consisting of three parts:
+           
+           - Foreground: aka diagnostics, the text that explains why the alert popped up
+           - Middleground: the medium-sized semi-transparent white rectangle behind the diagnostic text
+           - Background: the large color gradient rectangle behind the semi-transparent white rectangle
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
+           
+        // create the close button, set it to disabled as default
         Button close = new Button("X");
         buttonStyle(close, true);
         
-        //BoxBlur boxBlur = new BoxBlur();
+        // create the background and middleground rectangles
+        Rectangle closureMessageBackground = new Rectangle(squareSize*3, squareSize);
+        Rectangle closureMessageMiddleground = new Rectangle(squareSize*3 - 15, squareSize - 15);
         
-        Rectangle notificationBackgroundBig = new Rectangle(squareSize*3, squareSize);
-        Rectangle notificationBackground = new Rectangle(squareSize*3 - 15, squareSize - 15);
-        notificationBackground.setFill(Color.rgb(255,255,255,0.85));
+        // set the middleground color (semi-transparent white)
+        closureMessageMiddleground.setFill(Color.rgb(255,255,255,0.85));
+        
+        // create text diagnostics and set font
         Text diagnostics = new Text("Here's what went wrong:");
         diagnostics.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-        StackPane notification = new StackPane();
-        notification.getChildren().add(notificationBackgroundBig);
-        notification.getChildren().add(notificationBackground);
-        notification.getChildren().add(diagnostics);
         
-        close.setTranslateX(squareSize + squareSize/2);
-        close.setTranslateY(-squareSize/2);
-        notification.getChildren().add(close);
+        // create stack pane for the closure message,
+        // created up here so that it can be pushed to front or back when handling 'alert set on action' event
+        StackPane closureMessage = new StackPane();
         
-        
+        // if 'alert' button (!) clicked, do the following:
+        // 1. set the message background color to the gradient of the initial color and the result
+        // 2. bring message stack pane to front
+        // 3. disable the 'alert' button and enable the 'close' button
         alert.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -335,35 +379,29 @@ public class ColorPickerDemo extends Application {
             
                 Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
                 LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-                notificationBackgroundBig.setFill(lg1);
+                closureMessageBackground.setFill(lg1);
             
-                notification.toFront();
-                //close.toFront();
+                closureMessage.toFront();
+                
                 buttonStyle(alert, true);
                 buttonStyle(close, false);
                 
-                /*text1.setEffect(boxBlur);
-                text2.setEffect(boxBlur);
-                text3.setEffect(boxBlur);*/
-                
-                
+                // if 'close' button (X) clicked, do the following:
+                // 1. set the message background color to transparent
+                // 2. push message stack pane to back
+                // 3. disable the 'close' button and enable the 'alert' button
                 close.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
                    public void handle(ActionEvent event) {
                    
-                      notificationBackgroundBig.setFill(Color.TRANSPARENT);
+                      closureMessageBackground.setFill(Color.TRANSPARENT);
                    
-                      notification.toBack();
+                      closureMessage.toBack();
+                      
                       buttonStyle(alert, false);
                       buttonStyle(close, true);
-                      
-                      /*text1.setEffect(null);
-                      text2.setEffect(null);
-                      text3.setEffect(null);*/
                    }
                 });
-                
-                
             }
         });
         
@@ -371,10 +409,26 @@ public class ColorPickerDemo extends Application {
         
         
         
-        //
         
+        
+        
+        
+        
+        
+        
+        
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           This section is for the 'shuffle' button that randomizes the input and mipoint colors.
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
+           
+        //create the shuffle button
         Button shuffle = new Button("Shuffle");
         
+        // if 'alert' button (!) clicked, do the following:
+        // 1. choose random initial color
+        // 2. choose brighter or darker midpoint color
+        // 3. update the 3 squares
         shuffle.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
@@ -384,7 +438,7 @@ public class ColorPickerDemo extends Application {
                 colorPicker1.setValue(initialColor);
                 color1 = ColorToHexString(initialColor);
                 
-                text1Color = yiqColorSpace(jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                text1Color = yiqColorSpace(jump.getRGB('R',1), jump.getRGB('G',1), jump.getRGB('B',1));
                 if (text1Color.equals(Color.WHITE)) {
                      colorPicker2.setValue(initialColor.brighter());
                      color2 = ColorToHexString(initialColor.brighter());
@@ -405,55 +459,84 @@ public class ColorPickerDemo extends Application {
         
         
         
+        
+        
+        
+        
+        
+        
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           This section is for the 'see gradient' button that overlays a gradient of the
+           initial color and result over the three squares.
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
+        
+        //create see gradient/colors buttons   
         Button gradient = new Button("See Gradient");
         Button closeGradient = new Button("See Colors");
+        
+        //disable and set to invisible the see colors button
         closeGradient.setDisable(true);
         closeGradient.setVisible(false);
         
-        //Rectangle gradientBig = new Rectangle(squareSize*3, squareSize);
-        gradientBig.setFill(Color.WHITE);
+        // create stack pane for the gradient,
+        // created up here so that it can be pushed to front or back when handling 'gradient set on action' event
         StackPane grad = new StackPane();
-        grad.getChildren().add(gradientBig);
-        //grad.getChildren().add(closeGradient);
         
-        StackPane gradientButtons = new StackPane();
-        gradientButtons.getChildren().add(gradient);
-        gradientButtons.getChildren().add(closeGradient);
-        
+        // if 'see gradient' button clicked, do the following:
+        // 1. bring gradient to front
+        // 2. set gradient color
+        // 3. disable and set invisible the see gradient button
+        // 4. enable and set visible the see colors button
         gradient.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
                 
                    grad.toFront();
+                   
                    Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
                    LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
                    gradientBig.setFill(lg1);
+                   
                    gradient.setDisable(true);
                    gradient.setVisible(false);
+                   
                    closeGradient.setDisable(false);
                    closeGradient.setVisible(true);
                 
-                
+                   
+                   // if 'see gradient' button clicked, do the following:
+                   // 1. push gradient to back
+                   // 2. enable and set visible the see gradient button
+                   // 3. disable and set invisible the see colors button
                    closeGradient.setOnAction(new EventHandler<ActionEvent>() {
                       @Override
                       public void handle(ActionEvent event) {
                       
                          grad.toBack();
-                         gradientBig.setFill(Color.WHITE);
+                         
                          gradient.setDisable(false);
                          gradient.setVisible(true);
+                         
                          closeGradient.setDisable(true);
                          closeGradient.setVisible(false);
-                         //alert.toFront();
                       }
                    });
-                   
-                
-                
             }
         });
         
+        
+        
+        
+        
+        
+        
+        
+        
+        /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
+           This section is for tiny gradient visible below the color pickers.
+           ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         
         gradientTopHalf.setTranslateX(squareSize);
         //gradientTopHalf.setTranslateY(-(int)squareSize/2);
@@ -502,7 +585,7 @@ public class ColorPickerDemo extends Application {
         thirdSquare.setTranslateY(padSize);
         alert.setTranslateX(squareSize/2);
         alert.setTranslateY(-squareSize/2);
-        thirdSquare.getChildren().add(alert);
+        //thirdSquare.getChildren().add(alert);
         
         
         colorPicker1.setMinWidth(squareSize);
@@ -513,6 +596,17 @@ public class ColorPickerDemo extends Application {
         colorPicker2.getStyleClass().add("button");
         getResults.setMinWidth(squareSize);
         getResults.setMaxWidth(squareSize);
+        
+        
+        
+        //see gradient button
+        grad.getChildren().add(gradientBig);
+        
+        StackPane gradientButtons = new StackPane();
+        gradientButtons.getChildren().add(gradient);
+        gradientButtons.getChildren().add(closeGradient);
+        
+        
         
         HBox buttons = new HBox();
         buttons.getChildren().add(colorPicker1);
@@ -542,10 +636,11 @@ public class ColorPickerDemo extends Application {
         grad.setTranslateX(squareSize);
         grad.setTranslateY(padSize);
         squares.getChildren().add(grad);
+        thirdSquare.getChildren().add(alert);
         //
-        notification.setTranslateX(squareSize);
-        notification.setTranslateY(padSize);
-        squares.getChildren().add(notification);
+        closureMessage.setTranslateX(squareSize);
+        closureMessage.setTranslateY(padSize);
+        squares.getChildren().add(closureMessage);
         //
         firstSquare.setTranslateX(0);
         squares.getChildren().add(firstSquare);
@@ -557,6 +652,19 @@ public class ColorPickerDemo extends Application {
         squares.setTranslateX(-squareSize + padSize);
         //
         squares.getChildren().add(gradientTopHalf);
+        
+        
+        //closure mssg
+        closureMessage.getChildren().add(closureMessageBackground);
+        closureMessage.getChildren().add(closureMessageMiddleground);
+        closureMessage.getChildren().add(diagnostics);
+        close.setTranslateX(squareSize + squareSize/2);
+        close.setTranslateY(-squareSize/2);
+        closureMessage.getChildren().add(close);
+        
+        
+        
+        
         
         FlowPane root = new FlowPane();
         /*root.getChildren().add(firstSquare);

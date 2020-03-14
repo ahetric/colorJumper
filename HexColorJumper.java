@@ -107,9 +107,9 @@ public class HexColorJumper {
       return bfinal;
    }
    
-   public int getRGB(String mode, int number) {
+   public int getRGB(char mode, int number) {
       switch(mode) {
-         case "R":
+         case 'R':
             switch(number) {
                case 1:
                   return r1_int;
@@ -118,7 +118,7 @@ public class HexColorJumper {
                case 3:
                   return rfinal;
             }
-         case "G":
+         case 'G':
             switch(number) {
                case 1:
                   return g1_int;
@@ -127,7 +127,7 @@ public class HexColorJumper {
                case 3:
                   return gfinal;
             }
-         case "B":
+         case 'B':
             switch(number) {
                case 1:
                   return b1_int;
