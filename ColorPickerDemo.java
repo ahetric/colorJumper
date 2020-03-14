@@ -236,6 +236,9 @@ public class ColorPickerDemo extends Application {
     @Override
     public void start(Stage stage) {
     
+        //jump.setClosure("STOP_AT_BOUND");
+        jump.setClosure("ROLLOVER");
+    
         // Set up first color picker and starting 'initial' color
         final ColorPicker colorPicker1 = new ColorPicker();
         Color initialColor = Color.color(Math.random(), Math.random(), Math.random());

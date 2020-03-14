@@ -21,9 +21,20 @@ public class HexColorJumper {
    
    private static boolean withinBounds = true;
    
+   // enumerate the possible ways of dealing with operations
+   // in the range 0-255 not being closed under addition/subtraction
+   // ROLLOVER: mod the result by 255 to remain in the proper range
+   // STOP_AT_BOUND: if a number were to fall out of the range, instead 'cap' it at the most extreme possible value
+   //public static enum Closure {ROLLOVER, STOP_AT_BOUND};
+   
+   private static String ensureClosure;
+   public void setClosure(String c) {
+      ensureClosure = c;
+   }
+   
    // Constructor
    public HexColorJumper() {
-      // Purposefully empty
+      // Purposefully empty, use setters later
    }
    
    // Constructor
@@ -134,13 +145,20 @@ public class HexColorJumper {
       return withinBounds;
    }
    
+   
+   
+   
+   
+   
+   
+   
    public static void updateInputColors() {
-      // Extract RGB of color 1
+        // Extract RGB of color 1 in format "#rrggbb"
         String r1 = c1.substring(1,3);
         String g1 = c1.substring(3,5);
         String b1 = c1.substring(5,7);
         
-        // Extract RGB of color 2
+        // Extract RGB of color 2 in format "#rrggbb"
         String r2 = c2.substring(1,3);
         String g2 = c2.substring(3,5);
         String b2 = c2.substring(5,7);
@@ -178,16 +196,37 @@ public class HexColorJumper {
             rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
         else
             rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);*/
-        if (rgb2_int >= rgb1_int)
-            rgbfinal = Math.abs((rgbtemp+rgb2_int));
-        else
-            rgbfinal = Math.abs((rgbtemp-rgb2_int));
         
-        withinBounds = true;
-        if (rgbfinal > 0xFF || rgbfinal < 0x00)
-            withinBounds = false;
         
-        rgbfinal = rgbfinal % 0x100;
+        switch (ensureClosure) {
+           case "ROLLOVER":
+              if (rgb2_int >= rgb1_int)
+                  rgbfinal = Math.abs((rgbtemp+rgb2_int));
+              else
+                  rgbfinal = Math.abs((rgbtemp-rgb2_int));
+              
+              withinBounds = true;
+               if (rgbfinal > 0xFF || rgbfinal < 0x00)
+                  withinBounds = false;
+              
+              rgbfinal = rgbfinal % 0x100;
+              break;
+              
+            case "STOP_AT_BOUND":
+               if (rgb2_int >= rgb1_int)
+                  rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
+               else
+                  rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);
+                  
+               withinBounds = true;
+               if (rgbfinal == 0xFF || rgbfinal == 0x00)
+                  withinBounds = false;
+                  
+               break;
+            default:
+               rgbfinal = 0;
+               
+        }
         
         return rgbfinal;
    }
@@ -195,24 +234,7 @@ public class HexColorJumper {
    
    // Do the main arithmetic
    public static String calculate(String c1, String c2) {
-        
-        // Extract RGB of color 1
-        /*String r1 = c1.substring(1,3);
-        String g1 = c1.substring(3,5);
-        String b1 = c1.substring(5,7);
-        
-        // Extract RGB of color 2
-        String r2 = c2.substring(1,3);
-        String g2 = c2.substring(3,5);
-        String b2 = c2.substring(5,7);
-        
-        // Convert RGB Strings of each color to ints
-        r1_int = Integer.parseInt(r1, 16);
-        r2_int = Integer.parseInt(r2, 16);
-        g1_int = Integer.parseInt(g1, 16);
-        g2_int = Integer.parseInt(g2, 16);
-        b1_int = Integer.parseInt(b1, 16);
-        b2_int = Integer.parseInt(b2, 16);*/
+   
         updateInputColors();
         
         // Adjust for edge cases
@@ -247,7 +269,7 @@ public class HexColorJumper {
    
    
    
-    
+    //runner within this class
     /*public static void main(String args[]) {
         HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
         String c = jump.calculate(c1, c2);
