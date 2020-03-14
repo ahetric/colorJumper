@@ -42,6 +42,22 @@ import javafx.stage.PopupWindow.AnchorLocation;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 
+//linear gradient
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.ToggleButton;
+import javafx.beans.value.ChangeListener;
+import javafx.scene.control.Toggle;
+import javafx.beans.value.ObservableValue;
 
  
 public class ColorPickerDemo extends Application {
@@ -81,6 +97,9 @@ public class ColorPickerDemo extends Application {
     
     // create alert button
     Button alert = new Button("!");
+    
+    Rectangle gradientTopHalf = new Rectangle(squareSize*3, padSize*1.5 );
+    Rectangle gradientBig = new Rectangle(squareSize*3, squareSize);
 
 
 
@@ -202,6 +221,12 @@ public class ColorPickerDemo extends Application {
       updateSquare(square3, text3, resu, color3, text3Color);
                 
       System.out.println("(" + color1 + ", " + color2 + "): " + color3);
+      
+      Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+      LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+      gradientTopHalf.setFill(lg1);
+      gradientBig.setFill(lg1);
+      
     }
     
 
@@ -281,57 +306,61 @@ public class ColorPickerDemo extends Application {
         Button close = new Button("X");
         buttonStyle(close, true);
         
-        BoxBlur boxBlur = new BoxBlur();
+        //BoxBlur boxBlur = new BoxBlur();
         
+        Rectangle notificationBackgroundBig = new Rectangle(squareSize*3, squareSize);
         Rectangle notificationBackground = new Rectangle(squareSize*3 - 15, squareSize - 15);
-        notificationBackground.setFill(Color.rgb(255,255,255,0.65));
+        notificationBackground.setFill(Color.rgb(255,255,255,0.85));
         Text diagnostics = new Text("Here's what went wrong:");
+        diagnostics.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         StackPane notification = new StackPane();
+        notification.getChildren().add(notificationBackgroundBig);
         notification.getChildren().add(notificationBackground);
         notification.getChildren().add(diagnostics);
+        
+        close.setTranslateX(squareSize + squareSize/2);
+        close.setTranslateY(-squareSize/2);
+        notification.getChildren().add(close);
+        
         
         alert.setOnAction(new EventHandler<ActionEvent>() {
  
             @Override
             public void handle(ActionEvent event) {
+            
+                Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+                LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+                notificationBackgroundBig.setFill(lg1);
+            
                 notification.toFront();
+                //close.toFront();
                 buttonStyle(alert, true);
                 buttonStyle(close, false);
                 
-                text1.setEffect(boxBlur);
+                /*text1.setEffect(boxBlur);
                 text2.setEffect(boxBlur);
-                text3.setEffect(boxBlur);
-                square1.setEffect(boxBlur);
-                square2.setEffect(boxBlur);
-                square3.setEffect(boxBlur);
+                text3.setEffect(boxBlur);*/
                 
                 
                 close.setOnAction(new EventHandler<ActionEvent>() {
                    @Override
                    public void handle(ActionEvent event) {
+                   
+                      notificationBackgroundBig.setFill(Color.TRANSPARENT);
+                   
                       notification.toBack();
                       buttonStyle(alert, false);
                       buttonStyle(close, true);
                       
-                      text1.setEffect(null);
+                      /*text1.setEffect(null);
                       text2.setEffect(null);
-                      text3.setEffect(null);
-                      square1.setEffect(null);
-                      square2.setEffect(null);
-                      square3.setEffect(null);
+                      text3.setEffect(null);*/
                    }
                 });
                 
                 
             }
         });
-        
-        
-        
-        
-        
-        
-        
         
         
         
@@ -366,6 +395,74 @@ public class ColorPickerDemo extends Application {
             }
         });
         
+        
+        
+        
+        
+        
+        Button gradient = new Button("See Gradient");
+        Button closeGradient = new Button("See Colors");
+        closeGradient.setDisable(true);
+        closeGradient.setVisible(false);
+        
+        //Rectangle gradientBig = new Rectangle(squareSize*3, squareSize);
+        gradientBig.setFill(Color.WHITE);
+        StackPane grad = new StackPane();
+        grad.getChildren().add(gradientBig);
+        //grad.getChildren().add(closeGradient);
+        
+        StackPane gradientButtons = new StackPane();
+        gradientButtons.getChildren().add(gradient);
+        gradientButtons.getChildren().add(closeGradient);
+        
+        gradient.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                
+                   grad.toFront();
+                   Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+                   LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+                   gradientBig.setFill(lg1);
+                   gradient.setDisable(true);
+                   gradient.setVisible(false);
+                   closeGradient.setDisable(false);
+                   closeGradient.setVisible(true);
+                
+                
+                   closeGradient.setOnAction(new EventHandler<ActionEvent>() {
+                      @Override
+                      public void handle(ActionEvent event) {
+                      
+                         grad.toBack();
+                         gradientBig.setFill(Color.WHITE);
+                         gradient.setDisable(false);
+                         gradient.setVisible(true);
+                         closeGradient.setDisable(true);
+                         closeGradient.setVisible(false);
+                         //alert.toFront();
+                      }
+                   });
+                   
+                
+                
+            }
+        });
+        
+        
+        gradientTopHalf.setTranslateX(squareSize);
+        //gradientTopHalf.setTranslateY(-(int)squareSize/2);
+        //gradientTopHalf.setTranslateY(-15);
+        gradientTopHalf.setTranslateY(squareSize - 4);
+        Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+        LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+        gradientTopHalf.setFill(lg1);
+        
+        
+        
+        
+        
+        
         //
         
         /* Set Stage */
@@ -376,9 +473,9 @@ public class ColorPickerDemo extends Application {
         text3.setTextAlignment(TextAlignment.CENTER);
         
         // vertical baseline align the text that will overlay the three main squares
-        text1.setTranslateY(padSize - 4);
-        text2.setTranslateY(padSize - 4);
-        text3.setTranslateY(padSize - 4);
+        text1.setTranslateY(padSize);
+        text2.setTranslateY(padSize);
+        text3.setTranslateY(padSize);
         
  
         StackPane firstSquare = new StackPane();
@@ -398,11 +495,6 @@ public class ColorPickerDemo extends Application {
         thirdSquare.getChildren().add(text3);
         thirdSquare.setTranslateX(padSize);
         thirdSquare.setTranslateY(padSize);
-        //
-        close.setTranslateX(squareSize/2);
-        close.setTranslateY(-squareSize/2);
-        thirdSquare.getChildren().add(close);
-        //
         alert.setTranslateX(squareSize/2);
         alert.setTranslateY(-squareSize/2);
         thirdSquare.getChildren().add(alert);
@@ -424,19 +516,32 @@ public class ColorPickerDemo extends Application {
         buttons.setTranslateX(padSize);
         buttons.setTranslateY(padSize);
         
-        HBox randomize = new HBox();
+        HBox buttons2 = new HBox();
         shuffle.setMinWidth(squareSize);
         shuffle.setMaxWidth(squareSize);
-        randomize.getChildren().add(shuffle);
-        randomize.setTranslateX(squareSize + padSize);
-        randomize.setTranslateY(padSize*1.5);
+        gradient.setMinWidth(squareSize);
+        gradient.setMaxWidth(squareSize);
+        closeGradient.setMinWidth(squareSize);
+        closeGradient.setMaxWidth(squareSize);
+        buttons2.getChildren().add(shuffle);
+        //
+        buttons2.getChildren().add(gradientButtons);
+        //
+        buttons2.setTranslateX(squareSize + padSize);
+        buttons2.setTranslateY(padSize*1.5);
         
         
         
         StackPane squares = new StackPane();
+        //
+        grad.setTranslateX(squareSize);
+        grad.setTranslateY(padSize);
+        squares.getChildren().add(grad);
+        //
         notification.setTranslateX(squareSize);
         notification.setTranslateY(padSize);
         squares.getChildren().add(notification);
+        //
         firstSquare.setTranslateX(0);
         squares.getChildren().add(firstSquare);
         secondSquare.setTranslateX(squareSize);
@@ -444,7 +549,9 @@ public class ColorPickerDemo extends Application {
         thirdSquare.setTranslateX(2*squareSize);
         squares.getChildren().add(thirdSquare);
         //squares.setTranslateX(-squareSize/2 - padSize/2);
-        squares.setTranslateX(-squareSize + padSize+7);
+        squares.setTranslateX(-squareSize + padSize);
+        //
+        squares.getChildren().add(gradientTopHalf);
         
         FlowPane root = new FlowPane();
         /*root.getChildren().add(firstSquare);
@@ -452,7 +559,7 @@ public class ColorPickerDemo extends Application {
         root.getChildren().add(thirdSquare);*/
         root.getChildren().add(squares);
         root.getChildren().add(buttons);
-        root.getChildren().add(randomize);
+        root.getChildren().add(buttons2);
         
         //
  
