@@ -148,13 +148,12 @@ public class ColorPickerDemo extends Application {
      * https://stackoverflow.com/a/46470178
      * https://harthur.github.io/brain/
      *
-     * @param text The text that will change color [NOT NECESSARY?]
      * @param r The red value of the text
      * @param g The green value of the text
      * @param b The blue value of the text
      * @return The color of text that should overlay the corresponding square
      */
-    private Color setTextColor(Text text, int r, int g, int b) {
+    private Color yiqColorSpace(int r, int g, int b) {
       int yiq = ( (r * 299) + (g * 587) + (b * 114) ) / 1000;
       //return (yiq >= 128) ? Color.BLACK : Color.WHITE;
       return (yiq >= 186) ? Color.BLACK : Color.WHITE;
@@ -193,7 +192,7 @@ public class ColorPickerDemo extends Application {
       //color1 = ColorToHexString(colorPicker1.getValue());
       jump.setC1(color1);
       jump.updateInputColors();
-      text1Color = setTextColor(text1, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+      text1Color = yiqColorSpace(jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
       updateSquare(square1, text1, init, color1, text1Color);
                 
       buttonStyle(alert, true);
@@ -203,7 +202,7 @@ public class ColorPickerDemo extends Application {
       //color2 = ColorToHexString(colorPicker2.getValue());
       jump.setC2(color2);
       jump.updateInputColors();
-      text2Color = setTextColor(text2, jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
+      text2Color = yiqColorSpace(jump.getRGB("R",2), jump.getRGB("G",2), jump.getRGB("B",2));
       updateSquare(square2, text2, midp, color2, text2Color);
                 
       buttonStyle(alert, true);
@@ -217,7 +216,7 @@ public class ColorPickerDemo extends Application {
          buttonStyle(alert, false);
       }
                 
-      text3Color = setTextColor(text3, jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
+      text3Color = yiqColorSpace(jump.getRGB("R",3), jump.getRGB("G",3), jump.getRGB("B",3));
       updateSquare(square3, text3, resu, color3, text3Color);
                 
       System.out.println("(" + color1 + ", " + color2 + "): " + color3);
@@ -239,14 +238,17 @@ public class ColorPickerDemo extends Application {
         //jump.setClosure("STOP_AT_BOUND");
         jump.setClosure("ROLLOVER");
     
-        // Set up first color picker and starting 'initial' color
+        // Set up first color picker and the starting 'initial' color
         final ColorPicker colorPicker1 = new ColorPicker();
         Color initialColor = Color.color(Math.random(), Math.random(), Math.random());
         colorPicker1.setValue(initialColor);
         
-        // Set up second color picker the the starting 'midpoint' color
+        // Set up second color picker and the starting 'midpoint' color
         final ColorPicker colorPicker2 = new ColorPicker();
-        colorPicker2.setValue(initialColor.darker());
+        if (yiqColorSpace((int)initialColor.getRed(), (int)initialColor.getGreen(), (int)initialColor.getBlue()) == Color.BLACK)
+            colorPicker2.setValue(initialColor.darker());
+        else
+            colorPicker2.setValue(initialColor.brighter());
         
         // Convert the Color objects to hexadecimal String format
         color1 = ColorToHexString(colorPicker1.getValue());
@@ -382,7 +384,7 @@ public class ColorPickerDemo extends Application {
                 colorPicker1.setValue(initialColor);
                 color1 = ColorToHexString(initialColor);
                 
-                text1Color = setTextColor(text1, jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
+                text1Color = yiqColorSpace(jump.getRGB("R",1), jump.getRGB("G",1), jump.getRGB("B",1));
                 if (text1Color.equals(Color.WHITE)) {
                      colorPicker2.setValue(initialColor.brighter());
                      color2 = ColorToHexString(initialColor.brighter());

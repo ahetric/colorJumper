@@ -26,7 +26,6 @@ public class HexColorJumper {
    // ROLLOVER: mod the result by 255 to remain in the proper range
    // STOP_AT_BOUND: if a number were to fall out of the range, instead 'cap' it at the most extreme possible value
    //public static enum Closure {ROLLOVER, STOP_AT_BOUND};
-   
    private static String ensureClosure;
    public void setClosure(String c) {
       ensureClosure = c;
