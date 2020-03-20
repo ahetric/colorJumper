@@ -59,6 +59,7 @@ import javafx.scene.control.Toggle;
 import javafx.beans.value.ObservableValue;
 
 import javafx.util.Duration;
+import javafx.scene.control.RadioMenuItem;
 
  
 public class ColorPickerDemo extends Application {
@@ -252,11 +253,9 @@ public class ColorPickerDemo extends Application {
         /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
            Set closure mode. Options: {ROLLOVER, STOP_AT_BOUND}
            ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
-        // Choose 1 of the following:
-        //Closure typeOfClosure = Closure.ROLLOVER;
-        Closure typeOfClosure = Closure.STOP_AT_BOUND;
+           
         
-        jump.setClosure(typeOfClosure);
+        jump.setClosure(Closure.STOP_AT_BOUND);
     
     
         /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
@@ -581,18 +580,59 @@ public class ColorPickerDemo extends Application {
         
         
         MenuBar menuBar = new MenuBar();
+        //
         
         Menu menu1 = new Menu("Settings");
         menuBar.getMenus().add(menu1);
         
-        MenuItem menuItem1 = new MenuItem("Closure Mode");
-        MenuItem menuItem2 = new MenuItem("Item 2");
-      
-        menu1.getItems().add(menuItem1);
-        menu1.getItems().add(menuItem2);
+        Menu menu1item1 = new Menu("Closure Mode");
+        menu1.getItems().add(menu1item1);
         
+        RadioMenuItem menu1item1choice1 = new RadioMenuItem("Rollover");
+        RadioMenuItem menu1item1choice2 = new RadioMenuItem("Stop at Bounds");
+        menu1item1choice2.setSelected(true);
+      
+        ToggleGroup toggleGroup = new ToggleGroup();
+        toggleGroup.getToggles().add(menu1item1choice1);
+        toggleGroup.getToggles().add(menu1item1choice2);
+        
+        menu1item1.getItems().add(menu1item1choice1);
+        menu1item1.getItems().add(menu1item1choice2);
+        
+        menu1item1choice1.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                
+                jump.setClosure(Closure.ROLLOVER);
+                handleEventSquare3();
+                
+            }
+        });
+        
+        menu1item1choice2.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                
+                jump.setClosure(Closure.STOP_AT_BOUND);
+                handleEventSquare3();
+            }
+        });
+        
+        //
+        
+        Menu menu2 = new Menu("About");
+        menuBar.getMenus().add(menu2);
+        
+        MenuItem menu2item1 = new MenuItem("Closure");
+        menu2.getItems().add(menu2item1);
+        
+        //TOP, RIGHT, BOTTOM, LEFT
         menuBar.setStyle("-fx-padding: 0 1 0 1;");
-        //menu1.setStyle("-fx-padding: 1 5 1 5;");
+        
+        menu1.setStyle("-fx-padding: 1 5 1 5;");
+        menu2.setStyle("-fx-padding: 1 5 1 5;");
         
         
         
@@ -723,7 +763,8 @@ public class ColorPickerDemo extends Application {
         /*root.getChildren().add(firstSquare);
         root.getChildren().add(secondSquare);
         root.getChildren().add(thirdSquare);*/
-        //root.getChildren().add(menuBar);
+        root.getChildren().add(menuBar);
+        int sceneHeight = (squareSize + (padSize*4));
         root.getChildren().add(squares);
         root.getChildren().add(buttons);
         root.getChildren().add(buttons2);
@@ -731,7 +772,7 @@ public class ColorPickerDemo extends Application {
         //
  
         int sceneWidth = (squareSize*3 + padSize*2);
-        int sceneHeight = (squareSize + (padSize*2 + padSize/2));
+        //int sceneHeight = (squareSize + (padSize*2 + padSize/2));
         Scene scene = new Scene(root, sceneWidth, sceneHeight + 15 + 25);
  
         stage.setTitle("colorJumper GUI");
