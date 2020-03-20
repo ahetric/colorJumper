@@ -105,6 +105,10 @@ public class ColorPickerDemo extends Application {
     
     String compromisedColorsList = "";
     Text diagnostics = new Text();
+    
+    // create the background and middleground rectangles for the closure message
+        Rectangle closureMessageBackground = new Rectangle(squareSize*3, squareSize);
+        Rectangle closureMessageMiddleground = new Rectangle(squareSize*3 - 15, squareSize - 15);
 
 
     /* Returns the hexadecimal String format of a Color.
@@ -229,6 +233,7 @@ public class ColorPickerDemo extends Application {
       LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
       gradientTopHalf.setFill(lg1);
       gradientBig.setFill(lg1);
+      closureMessageBackground.setFill(lg1);
       
       
       compromisedColorsList = "";
@@ -378,9 +383,7 @@ public class ColorPickerDemo extends Application {
         Button close = new Button("X");
         buttonStyle(close, true);
         
-        // create the background and middleground rectangles
-        Rectangle closureMessageBackground = new Rectangle(squareSize*3, squareSize);
-        Rectangle closureMessageMiddleground = new Rectangle(squareSize*3 - 15, squareSize - 15);
+        
         
         // set the middleground color (semi-transparent white)
         closureMessageMiddleground.setFill(Color.rgb(255,255,255,0.85));
@@ -400,10 +403,6 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
-            
-                Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
-                LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-                closureMessageBackground.setFill(lg1);
             
                 closureMessage.toFront();
                 
@@ -519,10 +518,6 @@ public class ColorPickerDemo extends Application {
                 
                    grad.toFront();
                    
-                   Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
-                   LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-                   gradientBig.setFill(lg1);
-                   
                    gradient.setDisable(true);
                    gradient.setVisible(false);
                    
@@ -566,9 +561,6 @@ public class ColorPickerDemo extends Application {
         //gradientTopHalf.setTranslateY(-(int)squareSize/2);
         //gradientTopHalf.setTranslateY(-15);
         gradientTopHalf.setTranslateY(squareSize - 4);
-        Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
-        LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
-        gradientTopHalf.setFill(lg1);
         
         
         
