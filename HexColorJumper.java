@@ -7,17 +7,20 @@ import java.lang.Math;
 
 public class HexColorJumper {
 
-   private static String c1;
-   private static String c2;
-   private static int r1_int;
-   private static int r2_int;
-   private static int rfinal;
-   private static int g1_int;
-   private static int g2_int;
-   private static int gfinal;
-   private static int b1_int;
-   private static int b2_int;
-   private static int bfinal;
+   private static String initial;
+   private static String midpoint;
+   
+   private static int initialRed;
+   private static int initialGreen;
+   private static int initialBlue;
+   
+   private static int midpointRed;
+   private static int midpointGreen;
+   private static int midpointBlue;
+   
+   private static int resultRed;
+   private static int resultGreen;
+   private static int resultBlue;
    
    private static boolean withinBounds;
    
@@ -38,73 +41,73 @@ public class HexColorJumper {
    
    // Constructor
    public HexColorJumper(String color1, String color2) {
-      c1 = color1;
-      c2 = color2;
+      initial = color1;
+      midpoint = color2;
    }
    
-   // Setter for c1
+   // Setter for initial
    public void setC1(String color1) {
-      c1 = color1;
+      initial = color1;
    }
    
-   // Setter for c2
+   // Setter for midpoint
    public void setC2(String color2) {
-      c2 = color2;
+      midpoint = color2;
    }
    
-   // Getter for c1
+   // Getter for initial
    public String getC1() {
-      return c1;
+      return initial;
    }
    
-   // Getter for c2
+   // Getter for midpoint
    public String getC2() {
-      return c2;
+      return midpoint;
    }
    
-   // Getter for r1_int
+   // Getter for initialRed
    public int getR1_int() {
-      return r1_int;
+      return initialRed;
    }
    
-   // Getter for r2_int
+   // Getter for midpointRed
    public int getR2_int() {
-      return r2_int;
+      return midpointRed;
    }
    
-   // Getter for rfinal
+   // Getter for resultRed
    public int getRfinal() {
-      return rfinal;
+      return resultRed;
    }
    
-   // Getter for g1_int
+   // Getter for initialGreen
    public int getG1_int() {
-      return g1_int;
+      return initialGreen;
    }
    
-   // Getter for g2_int
+   // Getter for midpointGreen
    public int getG2_int() {
-      return g2_int;
+      return midpointGreen;
    }
    
-   // Getter for gfinal
+   // Getter for resultGreen
    public int getGfinal() {
-      return gfinal;
+      return resultGreen;
    }
    
-   // Getter for b1_int
+   // Getter for initialBlue
    public int getB1_int() {
-      return b1_int;
+      return initialBlue;
    }
    
-   // Getter for b2_int
+   // Getter for midpointBlue
    public int getB2_int() {
-      return b2_int;
+      return midpointBlue;
    }
    
-   // Getter for bfinal
+   // Getter for resultBlue
    public int getBfinal() {
-      return bfinal;
+      return resultBlue;
    }
    
    public int getRGB(char mode, int number) {
@@ -112,29 +115,29 @@ public class HexColorJumper {
          case 'R':
             switch(number) {
                case 1:
-                  return r1_int;
+                  return initialRed;
                case 2:
-                  return r2_int;
+                  return midpointRed;
                case 3:
-                  return rfinal;
+                  return resultRed;
             }
          case 'G':
             switch(number) {
                case 1:
-                  return g1_int;
+                  return initialGreen;
                case 2:
-                  return g2_int;
+                  return midpointGreen;
                case 3:
-                  return gfinal;
+                  return resultGreen;
             }
          case 'B':
             switch(number) {
                case 1:
-                  return b1_int;
+                  return initialBlue;
                case 2:
-                  return b2_int;
+                  return midpointBlue;
                case 3:
-                  return bfinal;
+                  return resultBlue;
             }
       }
       return 0x00;
@@ -153,22 +156,22 @@ public class HexColorJumper {
    
    public static void updateInputColors() {
         // Extract RGB of color 1 in format "#rrggbb"
-        String r1 = c1.substring(1,3);
-        String g1 = c1.substring(3,5);
-        String b1 = c1.substring(5,7);
+        String r1 = initial.substring(1,3);
+        String g1 = initial.substring(3,5);
+        String b1 = initial.substring(5,7);
         
         // Extract RGB of color 2 in format "#rrggbb"
-        String r2 = c2.substring(1,3);
-        String g2 = c2.substring(3,5);
-        String b2 = c2.substring(5,7);
+        String r2 = midpoint.substring(1,3);
+        String g2 = midpoint.substring(3,5);
+        String b2 = midpoint.substring(5,7);
         
         // Convert RGB Strings of each color to ints
-        r1_int = Integer.parseInt(r1, 16);
-        r2_int = Integer.parseInt(r2, 16);
-        g1_int = Integer.parseInt(g1, 16);
-        g2_int = Integer.parseInt(g2, 16);
-        b1_int = Integer.parseInt(b1, 16);
-        b2_int = Integer.parseInt(b2, 16);
+        initialRed = Integer.parseInt(r1, 16);
+        midpointRed = Integer.parseInt(r2, 16);
+        initialGreen = Integer.parseInt(g1, 16);
+        midpointGreen = Integer.parseInt(g2, 16);
+        initialBlue = Integer.parseInt(b1, 16);
+        midpointBlue = Integer.parseInt(b2, 16);
    }
    
    // Adjust Edge Cases
@@ -179,102 +182,102 @@ public class HexColorJumper {
    }
    
    // Calculate new R, G, or B
-   private static int calculateRGB(int rgb1_int, int rgb2_int) {
-        int rgbtemp = Math.abs(rgb2_int-rgb1_int);
+   private static int calculateRGB(int rginitialBlue, int rgmidpointBlue) {
+        int rgbtemp = Math.abs(rgmidpointBlue-rginitialBlue);
         if (rgbtemp == 0x80) //is this necessary?
             rgbtemp = 0x7f;
         else if (rgbtemp == 0x7F)
             rgbtemp = 0x80;
         
-        int rgbfinal;
-        /*if (rgb2_int >= rgb1_int)
-            rgbfinal = Math.abs((rgbtemp+rgb2_int))%0x100;
+        int rgresultBlue;
+        /*if (rgmidpointBlue >= rginitialBlue)
+            rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue))%0x100;
         else
-            rgbfinal = Math.abs((rgbtemp-rgb2_int))%0x100;*/
-        /*if (rgb2_int >= rgb1_int)
-            rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
+            rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue))%0x100;*/
+        /*if (rgmidpointBlue >= rginitialBlue)
+            rgresultBlue = Math.min(Math.abs((rgbtemp+rgmidpointBlue)), 0xFF);
         else
-            rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);*/
+            rgresultBlue = Math.max(Math.abs((rgbtemp-rgmidpointBlue)), 0x00);*/
         
         
         switch (ensureClosure) {
            case "ROLLOVER":
-              /*if (rgb2_int >= rgb1_int)
-                  rgbfinal = Math.abs((rgbtemp+rgb2_int));
+              /*if (rgmidpointBlue >= rginitialBlue)
+                  rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue));
               else
-                  rgbfinal = Math.abs((rgbtemp-rgb2_int));
+                  rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue));
               
               withinBounds = true;
-               if (rgbfinal > 0xFF || rgbfinal < 0x00)
+               if (rgresultBlue > 0xFF || rgresultBlue < 0x00)
                   withinBounds = false;
               
-              rgbfinal = rgbfinal % 0x100;
+              rgresultBlue = rgresultBlue % 0x100;
               break;*/
               
-              if (rgb2_int >= rgb1_int)
-                  rgbfinal = Math.abs((rgbtemp+rgb2_int));
+              if (rgmidpointBlue >= rginitialBlue)
+                  rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue));
               else
-                  //rgbfinal = Math.abs((rgbtemp-rgb2_int));
-                  rgbfinal = Math.abs((rgb2_int-rgbtemp));
+                  //rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue));
+                  rgresultBlue = Math.abs((rgmidpointBlue-rgbtemp));
               
               //withinBounds = true;
-               if (rgbfinal > 0xFF || rgbfinal < 0x00)
+               if (rgresultBlue > 0xFF || rgresultBlue < 0x00)
                   withinBounds = false;
               
-              rgbfinal = rgbfinal % 0x100;
+              rgresultBlue = rgresultBlue % 0x100;
               break;
               
             case "STOP_AT_BOUND":
-               if (rgb2_int >= rgb1_int)
-                  rgbfinal = Math.min(Math.abs((rgbtemp+rgb2_int)), 0xFF);
+               if (rgmidpointBlue >= rginitialBlue)
+                  rgresultBlue = Math.min(Math.abs((rgbtemp+rgmidpointBlue)), 0xFF);
                else
-                  rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);
+                  rgresultBlue = Math.max(Math.abs((rgbtemp-rgmidpointBlue)), 0x00);
                   
                //withinBounds = true;
-               if (rgbfinal == 0xFF || rgbfinal == 0x00)
+               if (rgresultBlue == 0xFF || rgresultBlue == 0x00)
                   withinBounds = false;
                   
                break;
             default:
-               rgbfinal = 0;
+               rgresultBlue = 0;
                
         }
         
-        return rgbfinal;
+        return rgresultBlue;
    }
    
    
    // Do the main arithmetic
-   public static String calculate(String c1, String c2) {
+   public static String calculate(String initial, String midpoint) {
    
         updateInputColors();
         
         // Adjust for edge cases
-        r1_int = adjustEdgeCases(r1_int);
-        r2_int = adjustEdgeCases(r2_int);
-        g1_int = adjustEdgeCases(g1_int);
-        g2_int = adjustEdgeCases(g2_int);
-        b1_int = adjustEdgeCases(b1_int);
-        b2_int = adjustEdgeCases(b2_int);
+        initialRed = adjustEdgeCases(initialRed);
+        midpointRed = adjustEdgeCases(midpointRed);
+        initialGreen = adjustEdgeCases(initialGreen);
+        midpointGreen = adjustEdgeCases(midpointGreen);
+        initialBlue = adjustEdgeCases(initialBlue);
+        midpointBlue = adjustEdgeCases(midpointBlue);
 
         // Calculate new R, G, and B; adjust for edge cases
         withinBounds = true;
-        rfinal = calculateRGB(r1_int, r2_int);
-        gfinal = calculateRGB(g1_int, g2_int);
-        bfinal = calculateRGB(b1_int, b2_int);
+        resultRed = calculateRGB(initialRed, midpointRed);
+        resultGreen = calculateRGB(initialGreen, midpointGreen);
+        resultBlue = calculateRGB(initialBlue, midpointBlue);
         
         // Convert new R, G, B to Strings for printing output
-        String r = String.format("%02X", rfinal );
-        String g = String.format("%02X", gfinal );
-        String b = String.format("%02X", bfinal );
+        String r = String.format("%02X", resultRed );
+        String g = String.format("%02X", resultGreen );
+        String b = String.format("%02X", resultBlue );
         
         // Concatenate new R, G, B
         String c = "#" + r + g + b;
 
         // Print outputs
-        /*System.out.println("r1: " + r1 + ", r2: " + r2 + ", new R: " + String.format("%02X", rfinal ) );
-        System.out.println("g1: " + g1 + ", g2: " + g2 + ", new G: " + String.format("%02X", gfinal ) );
-        System.out.println("b1: " + b1 + ", b2: " + b2 + ", new B: " + String.format("%02X", bfinal ) );*/
+        /*System.out.println("r1: " + r1 + ", r2: " + r2 + ", new R: " + String.format("%02X", resultRed ) );
+        System.out.println("g1: " + g1 + ", g2: " + g2 + ", new G: " + String.format("%02X", resultGreen ) );
+        System.out.println("b1: " + b1 + ", b2: " + b2 + ", new B: " + String.format("%02X", resultBlue ) );*/
         
         return c;
    
@@ -285,7 +288,7 @@ public class HexColorJumper {
     //runner within this class
     /*public static void main(String args[]) {
         HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
-        String c = jump.calculate(c1, c2);
+        String c = jump.calculate(initial, midpoint);
         System.out.println("\n" + c);
     }*/
 }
