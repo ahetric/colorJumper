@@ -23,6 +23,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.Group;
@@ -551,6 +554,34 @@ public class ColorPickerDemo extends Application {
         
         
         
+        
+        
+        
+        
+        MenuBar menuBar = new MenuBar();
+        
+        Menu menu1 = new Menu("Settings");
+        menuBar.getMenus().add(menu1);
+        
+        MenuItem menuItem1 = new MenuItem("Closure Mode");
+        MenuItem menuItem2 = new MenuItem("Item 2");
+      
+        menu1.getItems().add(menuItem1);
+        menu1.getItems().add(menuItem2);
+        
+        menuBar.setStyle("-fx-padding: 0 1 0 1;");
+        //menu1.setStyle("-fx-padding: 1 5 1 5;");
+        
+        
+        
+        
+        
+        
+        
+        
+        /////////////////////////////////////////
+        
+        
         //
         
         /* Set Stage */
@@ -670,6 +701,7 @@ public class ColorPickerDemo extends Application {
         /*root.getChildren().add(firstSquare);
         root.getChildren().add(secondSquare);
         root.getChildren().add(thirdSquare);*/
+        //root.getChildren().add(menuBar);
         root.getChildren().add(squares);
         root.getChildren().add(buttons);
         root.getChildren().add(buttons2);

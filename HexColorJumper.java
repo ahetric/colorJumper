@@ -19,7 +19,7 @@ public class HexColorJumper {
    private static int b2_int;
    private static int bfinal;
    
-   private static boolean withinBounds = true;
+   private static boolean withinBounds;
    
    // enumerate the possible ways of dealing with operations
    // in the range 0-255 not being closed under addition/subtraction
@@ -199,12 +199,25 @@ public class HexColorJumper {
         
         switch (ensureClosure) {
            case "ROLLOVER":
-              if (rgb2_int >= rgb1_int)
+              /*if (rgb2_int >= rgb1_int)
                   rgbfinal = Math.abs((rgbtemp+rgb2_int));
               else
                   rgbfinal = Math.abs((rgbtemp-rgb2_int));
               
               withinBounds = true;
+               if (rgbfinal > 0xFF || rgbfinal < 0x00)
+                  withinBounds = false;
+              
+              rgbfinal = rgbfinal % 0x100;
+              break;*/
+              
+              if (rgb2_int >= rgb1_int)
+                  rgbfinal = Math.abs((rgbtemp+rgb2_int));
+              else
+                  //rgbfinal = Math.abs((rgbtemp-rgb2_int));
+                  rgbfinal = Math.abs((rgb2_int-rgbtemp));
+              
+              //withinBounds = true;
                if (rgbfinal > 0xFF || rgbfinal < 0x00)
                   withinBounds = false;
               
@@ -217,7 +230,7 @@ public class HexColorJumper {
                else
                   rgbfinal = Math.max(Math.abs((rgbtemp-rgb2_int)), 0x00);
                   
-               withinBounds = true;
+               //withinBounds = true;
                if (rgbfinal == 0xFF || rgbfinal == 0x00)
                   withinBounds = false;
                   
@@ -245,6 +258,7 @@ public class HexColorJumper {
         b2_int = adjustEdgeCases(b2_int);
 
         // Calculate new R, G, and B; adjust for edge cases
+        withinBounds = true;
         rfinal = calculateRGB(r1_int, r2_int);
         gfinal = calculateRGB(g1_int, g2_int);
         bfinal = calculateRGB(b1_int, b2_int);
