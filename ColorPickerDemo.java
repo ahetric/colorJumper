@@ -58,6 +58,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.scene.control.Toggle;
 import javafx.beans.value.ObservableValue;
 
+import javafx.util.Duration;
+
  
 public class ColorPickerDemo extends Application {
 
@@ -99,6 +101,9 @@ public class ColorPickerDemo extends Application {
     
     Rectangle gradientTopHalf = new Rectangle(squareSize*3, padSize*1.5 );
     Rectangle gradientBig = new Rectangle(squareSize*3, squareSize);
+    
+    String compromisedColorsList = "";
+    Text diagnostics = new Text();
 
 
     /* Returns the hexadecimal String format of a Color.
@@ -224,6 +229,17 @@ public class ColorPickerDemo extends Application {
       gradientTopHalf.setFill(lg1);
       gradientBig.setFill(lg1);
       
+      
+      compromisedColorsList = "";
+      if (jump.getRedCompromised())
+            compromisedColorsList += "\n- Red";
+      if (jump.getGreenCompromised())
+            compromisedColorsList += "\n- Green";
+      if (jump.getBlueCompromised())
+            compromisedColorsList += "\n- Blue";
+      diagnostics.setText("Color(s) could not be calculated correctly:" + compromisedColorsList + "\nFor more details, go to About > Closure.");
+      
+      
     }
     
 
@@ -236,9 +252,10 @@ public class ColorPickerDemo extends Application {
         /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
            Set closure mode. Options: {ROLLOVER, STOP_AT_BOUND}
            ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
-        //jump.setClosure("STOP_AT_BOUND");
-        //jump.setClosure("ROLLOVER");
-        Closure typeOfClosure = Closure.ROLLOVER;
+        // Choose 1 of the following:
+        //Closure typeOfClosure = Closure.ROLLOVER;
+        Closure typeOfClosure = Closure.STOP_AT_BOUND;
+        
         jump.setClosure(typeOfClosure);
     
     
@@ -353,6 +370,11 @@ public class ColorPickerDemo extends Application {
            - Background: the large color gradient rectangle behind the semi-transparent white rectangle
            ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
            
+        //set alert button tooltip
+        Tooltip hoverOnAlert = new Tooltip("Why doesn't this result look right?");
+        hoverOnAlert.setShowDelay(Duration.seconds(0));
+        alert.setTooltip(hoverOnAlert);
+           
         // create the close button, set it to disabled as default
         Button close = new Button("X");
         buttonStyle(close, true);
@@ -364,8 +386,7 @@ public class ColorPickerDemo extends Application {
         // set the middleground color (semi-transparent white)
         closureMessageMiddleground.setFill(Color.rgb(255,255,255,0.85));
         
-        // create text diagnostics and set font
-        Text diagnostics = new Text("Here's what went wrong:");
+        //diagnostics font
         diagnostics.setFont(Font.font("Arial", FontWeight.BOLD, 12));
         
         // create stack pane for the closure message,

@@ -23,19 +23,17 @@ public class HexColorJumper {
    private static int resultBlue;
    
    private static boolean withinBounds;
+   private static boolean compromised;
+   private static boolean redCompromised;
+   private static boolean greenCompromised;
+   private static boolean blueCompromised;
    
-   private static Closure typeOfClosure;
+   private static Closure typeOfClosure = Closure.ROLLOVER;
    
    // enumerate the possible ways of dealing with operations
    // in the range 0-255 not being closed under addition/subtraction
    // ROLLOVER: mod the result by 255 to remain in the proper range
    // STOP_AT_BOUND: if a number were to fall out of the range, instead 'cap' it at the most extreme possible value
-   //public static enum Closure {ROLLOVER, STOP_AT_BOUND};
-   private static String ensureClosure;
-   public void setClosure(String c) {
-      ensureClosure = c;
-   }
-   
    public void setClosure(Closure c) {
       typeOfClosure = c;
    }
@@ -153,8 +151,17 @@ public class HexColorJumper {
       return withinBounds;
    }
    
+   public boolean getRedCompromised() {
+      return redCompromised;
+   }
    
+   public boolean getGreenCompromised() {
+      return greenCompromised;
+   }
    
+   public boolean getBlueCompromised() {
+      return blueCompromised;
+   }
    
    
    
@@ -188,71 +195,52 @@ public class HexColorJumper {
    }
    
    // Calculate new R, G, or B
-   private static int calculateRGB(int rginitialBlue, int rgmidpointBlue) {
-        int rgbtemp = Math.abs(rgmidpointBlue-rginitialBlue);
+   private static int calculateRGB(int rgb1, int rgb2) {
+        int rgbtemp = Math.abs(rgb2-rgb1);
         if (rgbtemp == 0x80) //is this necessary?
             rgbtemp = 0x7f;
         else if (rgbtemp == 0x7F)
             rgbtemp = 0x80;
         
-        int rgresultBlue;
-        /*if (rgmidpointBlue >= rginitialBlue)
-            rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue))%0x100;
-        else
-            rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue))%0x100;*/
-        /*if (rgmidpointBlue >= rginitialBlue)
-            rgresultBlue = Math.min(Math.abs((rgbtemp+rgmidpointBlue)), 0xFF);
-        else
-            rgresultBlue = Math.max(Math.abs((rgbtemp-rgmidpointBlue)), 0x00);*/
+        int rgb3;
         
         
-        //switch (ensureClosure) {
         switch (typeOfClosure) {
-           //case "ROLLOVER":
            case ROLLOVER:
-              /*if (rgmidpointBlue >= rginitialBlue)
-                  rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue));
+              
+              if (rgb2 >= rgb1)
+                  rgb3 = Math.abs((rgbtemp+rgb2));
               else
-                  rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue));
-              
-              withinBounds = true;
-               if (rgresultBlue > 0xFF || rgresultBlue < 0x00)
-                  withinBounds = false;
-              
-              rgresultBlue = rgresultBlue % 0x100;
-              break;*/
-              
-              if (rgmidpointBlue >= rginitialBlue)
-                  rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue));
-              else
-                  //rgresultBlue = Math.abs((rgbtemp-rgmidpointBlue));
-                  rgresultBlue = Math.abs((rgmidpointBlue-rgbtemp));
+                  rgb3 = Math.abs((rgb2-rgbtemp));
               
               //withinBounds = true;
-               if (rgresultBlue > 0xFF || rgresultBlue < 0x00)
+               if (rgb3 > 0xFF || rgb3 < 0x00) {
                   withinBounds = false;
+                  compromised = true;
+               }
               
-              rgresultBlue = rgresultBlue % 0x100;
+              rgb3 = rgb3 % 0x100;
               break;
               
-            //case "STOP_AT_BOUND":
             case STOP_AT_BOUND:
-               if (rgmidpointBlue >= rginitialBlue)
-                  rgresultBlue = Math.min(Math.abs((rgbtemp+rgmidpointBlue)), 0xFF);
+               if (rgb2 >= rgb1)
+                  rgb3 = Math.min(Math.abs((rgbtemp+rgb2)), 0xFF);
                else
-                  rgresultBlue = Math.max(Math.abs((rgbtemp-rgmidpointBlue)), 0x00);
+                  rgb3 = Math.max(Math.abs((rgbtemp-rgb2)), 0x00);
                   
                //withinBounds = true;
-               if (rgresultBlue == 0xFF || rgresultBlue == 0x00)
+               if (rgb3 == 0xFF || rgb3 == 0x00) {
                   withinBounds = false;
+                  compromised = true;
+               }
                   
                break;
             default:
-               rgresultBlue = 0;
+               rgb3 = 0;
                
         }
         
-        return rgresultBlue;
+        return rgb3;
    }
    
    
@@ -271,9 +259,22 @@ public class HexColorJumper {
 
         // Calculate new R, G, and B; adjust for edge cases
         withinBounds = true;
+        compromised = false;
+        redCompromised = false;
+        greenCompromised = false;
+        blueCompromised = false;
         resultRed = calculateRGB(initialRed, midpointRed);
+        if (compromised)
+            redCompromised = true;
+        compromised = false;
         resultGreen = calculateRGB(initialGreen, midpointGreen);
+        if (compromised)
+            greenCompromised = true;
+        compromised = false;
         resultBlue = calculateRGB(initialBlue, midpointBlue);
+        if (compromised)
+            blueCompromised = true;
+        compromised = false;
         
         // Convert new R, G, B to Strings for printing output
         String r = String.format("%02X", resultRed );
@@ -295,9 +296,13 @@ public class HexColorJumper {
    
    
     //runner within this class
-    /*public static void main(String args[]) {
-        HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
+    public static void main(String args[]) {
+        //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
+        HexColorJumper jump = new HexColorJumper("#FE0000", "#FF0000");
         String c = jump.calculate(initial, midpoint);
         System.out.println("\n" + c);
-    }*/
+        
+        if (redCompromised || greenCompromised || blueCompromised)
+            System.out.println("welp");
+    }
 }
