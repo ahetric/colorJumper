@@ -228,7 +228,7 @@ public class HexColorJumper {
                else
                   rgb3 = Math.max(Math.abs((rgbtemp-rgb2)), 0x00);
                   
-               //withinBounds = true;
+               //this hits even colors that would be fine;
                if (rgb3 == 0xFF || rgb3 == 0x00) {
                   withinBounds = false;
                   compromised = true;
