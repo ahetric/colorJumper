@@ -244,7 +244,7 @@ public class ColorPickerDemo extends Application {
             compromisedColorsList += "\n- Green";
       if (jump.getBlueCompromised())
             compromisedColorsList += "\n- Blue";
-      diagnostics.setText("Color(s) could not be calculated correctly:" + compromisedColorsList + "\nFor more details, go to About > Closure.");
+      diagnostics.setText("RGB color(s) out of gamut:" + compromisedColorsList + "\nFor more details, go to About > Closure.");
       
       
     }
@@ -332,6 +332,7 @@ public class ColorPickerDemo extends Application {
             public void handle(ActionEvent event) {
                 color1 = ColorToHexString(colorPicker1.getValue());
                 handleEventSquare1();
+                //handleEventSquare3();
             }
         });
         
@@ -345,6 +346,7 @@ public class ColorPickerDemo extends Application {
             public void handle(ActionEvent event) {
                 color2 = ColorToHexString(colorPicker2.getValue());
                 handleEventSquare2();
+                //handleEventSquare3();
             }
         });
         
@@ -629,6 +631,21 @@ public class ColorPickerDemo extends Application {
         
         MenuItem menu2item1 = new MenuItem("Closure");
         menu2.getItems().add(menu2item1);
+        
+        menu2item1.setOnAction(new EventHandler<ActionEvent>() {
+ 
+            @Override
+            public void handle(ActionEvent event) {
+                    
+                final Stage aboutClosure = new Stage();
+                VBox aboutClosureVbox = new VBox(20);
+                aboutClosureVbox.getChildren().add(new Text("About closure."));
+                Scene aboutClosureScene = new Scene(aboutClosureVbox, 300, 200);
+                aboutClosure.setScene(aboutClosureScene);
+                aboutClosure.initOwner(stage);
+                aboutClosure.show();
+            }
+        });
         
         //TOP, RIGHT, BOTTOM, LEFT
         menuBar.setStyle("-fx-padding: 0 1 0 1;");
