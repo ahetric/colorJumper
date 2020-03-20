@@ -24,6 +24,8 @@ public class HexColorJumper {
    
    private static boolean withinBounds;
    
+   private static Closure typeOfClosure;
+   
    // enumerate the possible ways of dealing with operations
    // in the range 0-255 not being closed under addition/subtraction
    // ROLLOVER: mod the result by 255 to remain in the proper range
@@ -32,6 +34,10 @@ public class HexColorJumper {
    private static String ensureClosure;
    public void setClosure(String c) {
       ensureClosure = c;
+   }
+   
+   public void setClosure(Closure c) {
+      typeOfClosure = c;
    }
    
    // Constructor
@@ -200,8 +206,10 @@ public class HexColorJumper {
             rgresultBlue = Math.max(Math.abs((rgbtemp-rgmidpointBlue)), 0x00);*/
         
         
-        switch (ensureClosure) {
-           case "ROLLOVER":
+        //switch (ensureClosure) {
+        switch (typeOfClosure) {
+           //case "ROLLOVER":
+           case ROLLOVER:
               /*if (rgmidpointBlue >= rginitialBlue)
                   rgresultBlue = Math.abs((rgbtemp+rgmidpointBlue));
               else
@@ -227,7 +235,8 @@ public class HexColorJumper {
               rgresultBlue = rgresultBlue % 0x100;
               break;
               
-            case "STOP_AT_BOUND":
+            //case "STOP_AT_BOUND":
+            case STOP_AT_BOUND:
                if (rgmidpointBlue >= rginitialBlue)
                   rgresultBlue = Math.min(Math.abs((rgbtemp+rgmidpointBlue)), 0xFF);
                else

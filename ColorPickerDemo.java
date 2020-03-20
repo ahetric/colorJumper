@@ -101,7 +101,6 @@ public class ColorPickerDemo extends Application {
     Rectangle gradientBig = new Rectangle(squareSize*3, squareSize);
 
 
-
     /* Returns the hexadecimal String format of a Color.
      * 
      * @param color The color to convert
@@ -238,7 +237,9 @@ public class ColorPickerDemo extends Application {
            Set closure mode. Options: {ROLLOVER, STOP_AT_BOUND}
            ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         //jump.setClosure("STOP_AT_BOUND");
-        jump.setClosure("ROLLOVER");
+        //jump.setClosure("ROLLOVER");
+        Closure typeOfClosure = Closure.ROLLOVER;
+        jump.setClosure(typeOfClosure);
     
     
         /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
