@@ -634,6 +634,8 @@ public class ColorPickerDemo extends Application {
         menu1.setStyle("-fx-padding: 1 5 1 5;");
         menu2.setStyle("-fx-padding: 1 5 1 5;");
         
+        menu1item1.setStyle("-fx-padding: 1 5 1 5;");
+        
         
         
         
