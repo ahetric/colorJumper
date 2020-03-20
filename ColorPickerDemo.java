@@ -229,8 +229,9 @@ public class ColorPickerDemo extends Application {
                 
       System.out.println("(" + color1 + ", " + color2 + "): " + color3);
       
-      Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
-      LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+      //Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+      //LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+      LinearGradient lg1 = updateGradient();
       gradientTopHalf.setFill(lg1);
       gradientBig.setFill(lg1);
       closureMessageBackground.setFill(lg1);
@@ -246,6 +247,12 @@ public class ColorPickerDemo extends Application {
       diagnostics.setText("Color(s) could not be calculated correctly:" + compromisedColorsList + "\nFor more details, go to About > Closure.");
       
       
+    }
+    
+    public LinearGradient updateGradient() {
+      Stop[] stops = new Stop[] { new Stop(0, Color.web(color1)), new Stop(1, Color.web(color3))};
+      LinearGradient lg1 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops);
+      return lg1;
     }
     
 
@@ -403,6 +410,9 @@ public class ColorPickerDemo extends Application {
  
             @Override
             public void handle(ActionEvent event) {
+            
+                LinearGradient lg1 = updateGradient();
+                closureMessageBackground.setFill(lg1);
             
                 closureMessage.toFront();
                 
