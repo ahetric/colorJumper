@@ -223,13 +223,17 @@ public class HexColorJumper {
               break;
               
             case STOP_AT_BOUND:
-               if (rgb2 >= rgb1)
-                  rgb3 = Math.min(Math.abs((rgbtemp+rgb2)), 0xFF);
-               else
-                  rgb3 = Math.max(Math.abs((rgbtemp-rgb2)), 0x00);
+               int rgb3temp = -1;
+               if (rgb2 >= rgb1) {
+                  rgb3temp = Math.abs((rgbtemp+rgb2));
+                  rgb3 = Math.min(rgb3temp, 0xFF);
+               }
+               else {
+                  rgb3temp = Math.abs((rgbtemp-rgb2));
+                  rgb3 = Math.max(rgb3temp, 0x00);
+               }
                   
-               //this hits even colors that would be fine;
-               if (rgb3 == 0xFF || rgb3 == 0x00) {
+               if (rgb3temp > 0xFF || rgb3temp < 0x00) {
                   withinBounds = false;
                   compromised = true;
                }

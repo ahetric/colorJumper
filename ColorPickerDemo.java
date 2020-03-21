@@ -529,6 +529,7 @@ public class ColorPickerDemo extends Application {
             public void handle(ActionEvent event) {
                 
                    grad.toFront();
+                   alert.toFront();
                    
                    gradient.setDisable(true);
                    gradient.setVisible(false);
