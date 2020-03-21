@@ -697,8 +697,10 @@ public class ColorPickerDemo extends Application {
         thirdSquare.getChildren().add(text3);
         thirdSquare.setTranslateX(padSize);
         thirdSquare.setTranslateY(padSize);
-        alert.setTranslateX(squareSize/2);
-        alert.setTranslateY(-squareSize/2);
+        //alert.setTranslateX(squareSize/2);
+        //alert.setTranslateY(-squareSize/2);
+        alert.setTranslateX(squareSize*2 + squareSize/2);
+        alert.setTranslateY(padSize-squareSize/2);
         //thirdSquare.getChildren().add(alert);
         
         
@@ -750,7 +752,8 @@ public class ColorPickerDemo extends Application {
         grad.setTranslateX(squareSize);
         grad.setTranslateY(padSize);
         squares.getChildren().add(grad);
-        thirdSquare.getChildren().add(alert);
+        //thirdSquare.getChildren().add(alert);
+        //squares.getChildren().add(alert);
         //
         closureMessage.setTranslateX(squareSize);
         closureMessage.setTranslateY(padSize);
@@ -762,6 +765,7 @@ public class ColorPickerDemo extends Application {
         squares.getChildren().add(secondSquare);
         thirdSquare.setTranslateX(2*squareSize);
         squares.getChildren().add(thirdSquare);
+        squares.getChildren().add(alert);
         //squares.setTranslateX(-squareSize/2 - padSize/2);
         squares.setTranslateX(-squareSize + padSize);
         //
