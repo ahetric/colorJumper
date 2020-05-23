@@ -1,6 +1,7 @@
 public class ToDo {
 
 
+-swap initial & midpoint colors
 
 -init
 
