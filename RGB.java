@@ -7,11 +7,11 @@
 
 public class RGB {
 
-   private static ColorComponent red;
-   private static ColorComponent green;
-   private static ColorComponent blue;
+   private ColorComponent red;
+   private ColorComponent green;
+   private ColorComponent blue;
    
-   private static boolean withinBounds;
+   private boolean withinBounds;
    
    public RGB(ColorComponent r, ColorComponent g, ColorComponent b) {
       red = r;

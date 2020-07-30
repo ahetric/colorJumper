@@ -7,9 +7,9 @@
 
 public class ColorComponent {
 
-   private static int component;
+   private int component;
    
-   private static boolean componentCompromised;
+   private boolean componentCompromised;
    
    public ColorComponent(int c) {
       component = c;

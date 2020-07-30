@@ -55,36 +55,15 @@ public class HexColorJumperPaint {
    
    
    
-   
-   /*public static void updateInputColors() {
-        // Extract RGB of color 1 in format "#rrggbb"
-        String r1 = initial.substring(1,3);
-        String g1 = initial.substring(3,5);
-        String b1 = initial.substring(5,7);
-        
-        // Extract RGB of color 2 in format "#rrggbb"
-        String r2 = midpoint.substring(1,3);
-        String g2 = midpoint.substring(3,5);
-        String b2 = midpoint.substring(5,7);
-        
-        // Convert RGB Strings of each color to ints
-        initialRed = Integer.parseInt(r1, 16);
-        midpointRed = Integer.parseInt(r2, 16);
-        initialGreen = Integer.parseInt(g1, 16);
-        midpointGreen = Integer.parseInt(g2, 16);
-        initialBlue = Integer.parseInt(b1, 16);
-        midpointBlue = Integer.parseInt(b2, 16);
-   }*/
-   
    // Adjust Edge Cases
-   private static int adjustEdgeCases(int rgb) {
-      if (rgb == 0x7F)
-         rgb = 0x80;
-      return rgb;
+   private static ColorComponent adjustEdgeCases(ColorComponent ofColor) {
+      if (ofColor.getComponent() == 0x7F)
+         ofColor.setComponent(0x80);
+      return ofColor;
    }
    
    // Calculate new R, G, or B
-   private static int calculateRGB(ColorComponent ofColor1, ColorComponent ofColor2) {
+   private static int calculateComponent(ColorComponent ofColor1, ColorComponent ofColor2) {
         int temp = Math.abs(ofColor2.getComponent() - ofColor1.getComponent());
         if (temp == 0x80) //is this necessary?
             temp = 0x7f;
@@ -132,23 +111,21 @@ public class HexColorJumperPaint {
    
    
    // Do the main arithmetic
-   public static String calculate(RGB color1, RGB color2) {
+   public static String calculate(RGB c1, RGB c2) {
    
-        //updateInputColors();
         
-        // Adjust for edge cases
-        /*initialRed = adjustEdgeCases(initialRed);
-        midpointRed = adjustEdgeCases(midpointRed);
-        initialGreen = adjustEdgeCases(initialGreen);
-        midpointGreen = adjustEdgeCases(midpointGreen);
-        initialBlue = adjustEdgeCases(initialBlue);
-        midpointBlue = adjustEdgeCases(midpointBlue);*/
+        color1.setRed(adjustEdgeCases(c1.getRed()));
+        color1.setGreen(adjustEdgeCases(c1.getGreen()));
+        color1.setBlue(adjustEdgeCases(c1.getBlue()));
+        color2.setRed(adjustEdgeCases(c2.getRed()));
+        color2.setGreen(adjustEdgeCases(c2.getGreen()));
+        color2.setBlue(adjustEdgeCases(c2.getBlue()));
 
 
 
-        int resultRed = calculateRGB(color1.getRed(), color2.getRed());
-        int resultGreen = calculateRGB(color1.getGreen(), color2.getGreen());
-        int resultBlue = calculateRGB(color1.getBlue(), color2.getBlue());
+        int resultRed = calculateComponent(color1.getRed(), color2.getRed());
+        int resultGreen = calculateComponent(color1.getGreen(), color2.getGreen());
+        int resultBlue = calculateComponent(color1.getBlue(), color2.getBlue());
         
         
         // Convert new R, G, B to Strings for printing output
@@ -174,11 +151,14 @@ public class HexColorJumperPaint {
     public static void main(String args[]) {
         //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
         
-        RGB c1 = new RGB(new ColorComponent(255),new ColorComponent(0),new ColorComponent(0));
-        RGB c2 = new RGB(new ColorComponent(0),new ColorComponent(255),new ColorComponent(0));
+        //RGB c1 = new RGB(new ColorComponent(255),new ColorComponent(0),new ColorComponent(0));
+        //RGB c2 = new RGB(new ColorComponent(0),new ColorComponent(255),new ColorComponent(0));
+        
+        RGB c1 = new RGB(new ColorComponent(0xFF),new ColorComponent(0),new ColorComponent(0));
+        RGB c2 = new RGB(new ColorComponent(0xB3),new ColorComponent(0x33),new ColorComponent(0x4D));
         
         HexColorJumperPaint jump = new HexColorJumperPaint(c1, c2);
-        String c = jump.calculate(c1, c1);
+        String c = jump.calculate(c1, c2);
         System.out.println("\n" + c);
     }
 }
