@@ -7,17 +7,13 @@
 
 public class RGB {
 
-   private static int red;
-   private static int green;
-   private static int blue;
-   
-   private static boolean redCompromised;
-   private static boolean greenCompromised;
-   private static boolean blueCompromised;
+   private static ColorComponent red;
+   private static ColorComponent green;
+   private static ColorComponent blue;
    
    private static boolean withinBounds;
    
-   public RGB(int r, int g, int b) {
+   public RGB(ColorComponent r, ColorComponent g, ColorComponent b) {
       red = r;
       green = g;
       blue = b;
@@ -26,17 +22,9 @@ public class RGB {
    }
    
    public boolean isInBounds() {
-      if (red < 0 || red > 255)
-         redCompromised = true;
-      redCompromised = false;
-      
-      if (green < 0 || green > 255)
-         greenCompromised = true;
-      greenCompromised = false;
-      
-      if (blue < 0 || blue > 255)
-         blueCompromised = true;
-      blueCompromised = false;
+      boolean redCompromised = red.isCompromised();
+      boolean greenCompromised = green.isCompromised();
+      boolean blueCompromised = blue.isCompromised();
       
       if (redCompromised || greenCompromised || blueCompromised)
          withinBounds = false;
@@ -45,51 +33,39 @@ public class RGB {
       return withinBounds;
    }
    
-   public void setRed(int r) {
+   public void setRed(ColorComponent r) {
       red = r;
    }
    
-   public int getRed() {
+   public ColorComponent getRed() {
       return red;
    }
    
-   public void setGreen(int g) {
+   public void setGreen(ColorComponent g) {
       green = g;
    }
    
-   public int getGreen() {
+   public ColorComponent getGreen() {
       return green;
    }
    
-   public void setBlue(int b) {
+   public void setBlue(ColorComponent b) {
       blue = b;
    }
    
-   public int getBlue() {
+   public ColorComponent getBlue() {
       return blue;
    }
    
-   public void setRedCompromised(boolean c) {
-      redCompromised = c;
-   }
-   
    public boolean getRedCompromised() {
-      return redCompromised;
-   }
-   
-   public void setGreenCompromised(boolean c) {
-      greenCompromised = c;
+      return red.isCompromised();
    }
    
    public boolean getGreenCompromised() {
-      return greenCompromised;
-   }
-   
-   public void setBlueCompromised(boolean c) {
-      blueCompromised = c;
+      return green.isCompromised();
    }
    
    public boolean getBlueCompromised() {
-      return blueCompromised;
+      return blue.isCompromised();
    }
 }

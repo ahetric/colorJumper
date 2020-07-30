@@ -84,65 +84,65 @@ public class HexColorJumperPaint {
    }
    
    // Calculate new R, G, or B
-   private static int calculateRGB(int componentOfColor1, int componentOfColor2) {
-        int temp = Math.abs(componentOfColor2 - componentOfColor1);
+   private static int calculateRGB(ColorComponent ofColor1, ColorComponent ofColor2) {
+        int temp = Math.abs(ofColor2.getComponent() - ofColor1.getComponent());
         if (temp == 0x80) //is this necessary?
             temp = 0x7f;
         else if (temp == 0x7F)
             temp = 0x80;
         
-        int componentOfColor3;
+        ColorComponent ofColor3 = new ColorComponent(0);
         
         
         
         switch (typeOfClosure) {
            case ROLLOVER:
               
-              if (componentOfColor2 >= componentOfColor1)
-                  componentOfColor3 = Math.abs((temp+componentOfColor2));
+              if (ofColor2.getComponent() >= ofColor1.getComponent())
+                  ofColor3.setComponent(Math.abs(temp+ofColor2.getComponent()));
               else
-                  componentOfColor3 = Math.abs((componentOfColor2-temp));
+                  ofColor3.setComponent(Math.abs(ofColor2.getComponent()-temp));
                
-              color3inBounds = componentOfColor3.isInBounds();
+              color3inBounds = !ofColor3.isCompromised();
               
-              componentOfColor3 = componentOfColor3 % 0x100;
+              ofColor3.setComponent(ofColor3.getComponent() % 0x100);
               break;
               
             case STOP_AT_BOUND:
                int rgb3temp = -1;
-               if (componentOfColor2 >= componentOfColor1) {
-                  rgb3temp = Math.abs((temp+componentOfColor2));
-                  componentOfColor3 = Math.min(rgb3temp, 0xFF);
+               if (ofColor2.getComponent() >= ofColor1.getComponent()) {
+                  rgb3temp = Math.abs((temp+ofColor2.getComponent()));
+                  ofColor3.setComponent(Math.min(rgb3temp, 0xFF));
                }
                else {
-                  rgb3temp = Math.abs((temp-componentOfColor2));
-                  componentOfColor3 = Math.max(rgb3temp, 0x00);
+                  rgb3temp = Math.abs((temp-ofColor2.getComponent()));
+                  ofColor3.setComponent(Math.max(rgb3temp, 0x00));
                }
                   
-               color3inBounds = componentOfColor3.isInBounds();
+               color3inBounds = !ofColor3.isCompromised();
                   
                break;
             default:
-               componentOfColor = 0;
+               ofColor3.setComponent(0);
                
         }
         
-        return componentOfColor3;
+        return ofColor3.getComponent();
    }
    
    
    // Do the main arithmetic
-   public static String calculate(String initial, String midpoint) {
+   public static String calculate(RGB color1, RGB color2) {
    
         //updateInputColors();
         
         // Adjust for edge cases
-        initialRed = adjustEdgeCases(initialRed);
+        /*initialRed = adjustEdgeCases(initialRed);
         midpointRed = adjustEdgeCases(midpointRed);
         initialGreen = adjustEdgeCases(initialGreen);
         midpointGreen = adjustEdgeCases(midpointGreen);
         initialBlue = adjustEdgeCases(initialBlue);
-        midpointBlue = adjustEdgeCases(midpointBlue);
+        midpointBlue = adjustEdgeCases(midpointBlue);*/
 
 
 
@@ -173,8 +173,12 @@ public class HexColorJumperPaint {
     //runner within this class
     public static void main(String args[]) {
         //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
-        HexColorJumperPaint jump = new HexColorJumperPaint(new RGB(255,0,0), new RGB(0,255,0));
-        String c = jump.calculate(color1, color2);
+        
+        RGB c1 = new RGB(new ColorComponent(255),new ColorComponent(0),new ColorComponent(0));
+        RGB c2 = new RGB(new ColorComponent(0),new ColorComponent(255),new ColorComponent(0));
+        
+        HexColorJumperPaint jump = new HexColorJumperPaint(c1, c2);
+        String c = jump.calculate(c1, c1);
         System.out.println("\n" + c);
     }
 }
