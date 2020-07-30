@@ -5,8 +5,6 @@
 
 import java.lang.Math;
 
-import javafx.scene.paint.Color;
-
 public class HexColorJumperPaint {
 
    private static RGB color1;
@@ -52,7 +50,10 @@ public class HexColorJumperPaint {
       return color2;
    }
    
-   
+   // Getter for result
+   public RGB getC3() {
+      return color3;
+   }
    
    
    // Adjust Edge Cases
@@ -63,7 +64,7 @@ public class HexColorJumperPaint {
    }
    
    // Calculate new R, G, or B
-   private static int calculateComponent(ColorComponent ofColor1, ColorComponent ofColor2) {
+   private static ColorComponent calculateComponent(ColorComponent ofColor1, ColorComponent ofColor2) {
         int temp = Math.abs(ofColor2.getComponent() - ofColor1.getComponent());
         if (temp == 0x80) //is this necessary?
             temp = 0x7f;
@@ -106,7 +107,7 @@ public class HexColorJumperPaint {
                
         }
         
-        return ofColor3.getComponent();
+        return ofColor3;
    }
    
    
@@ -123,15 +124,15 @@ public class HexColorJumperPaint {
 
 
 
-        int resultRed = calculateComponent(color1.getRed(), color2.getRed());
-        int resultGreen = calculateComponent(color1.getGreen(), color2.getGreen());
-        int resultBlue = calculateComponent(color1.getBlue(), color2.getBlue());
+        ColorComponent resultRed = calculateComponent(color1.getRed(), color2.getRed());
+        ColorComponent resultGreen = calculateComponent(color1.getGreen(), color2.getGreen());
+        ColorComponent resultBlue = calculateComponent(color1.getBlue(), color2.getBlue());
         
         
         // Convert new R, G, B to Strings for printing output
-        String r = String.format("%02X", resultRed );
-        String g = String.format("%02X", resultGreen );
-        String b = String.format("%02X", resultBlue );
+        String r = String.format("%02X", resultRed.getComponent() );
+        String g = String.format("%02X", resultGreen.getComponent() );
+        String b = String.format("%02X", resultBlue.getComponent() );
         
         // Concatenate new R, G, B
         String c = "#" + r + g + b;
