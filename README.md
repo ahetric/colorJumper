@@ -38,11 +38,9 @@ The user can also shuffle the two input colors.
 
 ### Problem with Closure
 
-This program uses the RGB color model to calculate colors. As such, there will be many instances where the result cannot be properly displayed because it falls out of bounds of the allotted 0-255 range given to each component of RGB. The range 0-255 is not closed under addition. The displayed result may look out of place.
+This program uses the RGB color model to calculate colors. As such, there will be many instances where the result cannot be properly displayed because it falls out of bounds of the allotted 0-255 range given to each component of RGB. The displayed result may look out of place.
 
 When this happens, the square containing the result color will have a small notification button in the top right corner that can be clicked for more information. A text box will be displayed over the color squares telling the user which color(s) was out of gamut, or out of range.
-
-<img src="/README_images/why_doesnt_this_result_look_right.png" width="500" />
 
 <img src="/README_images/stop_at_bounds_out_of_gamut.png" width="300" />
 
