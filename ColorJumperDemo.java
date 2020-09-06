@@ -1,65 +1,29 @@
 /*
-color picker demo
-https://o7planning.org/en/11135/javafx-colorpicker-tutorial
-
-button base code
-http://tutorials.jenkov.com/javafx/button.html
-
-group tutorial
-http://tutorials.jenkov.com/javafx/group.html
-
-popup tutorial
-https://www.geeksforgeeks.org/javafx-popup-class/
-*/
-
+ * @author Amelia Hetrick
+ * Last Updated: Sept 5 2020
+ *
+ * GUI for colorJumper
+ */
 
 import javafx.application.Application;
-import javafx.collections.*; 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.beans.value.*;
+import javafx.collections.*;
+import javafx.event.*;
+import javafx.geometry.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.Group;
 import javafx.scene.layout.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.paint.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text.*; 
+import javafx.scene.shape.*;
 import javafx.scene.text.*;
-import javafx.stage.Stage;
 import javafx.stage.Popup;
-
 import javafx.stage.PopupWindow.AnchorLocation;
-import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-
-//linear gradient
-import javafx.application.Application;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
-
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.ToggleButton;
-import javafx.beans.value.ChangeListener;
-import javafx.scene.control.Toggle;
-import javafx.beans.value.ObservableValue;
-
+import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.control.RadioMenuItem;
 
  
 public class ColorJumperDemo extends Application {

@@ -1,6 +1,8 @@
 /*
  * @author Amelia Hetrick
- * Last Updated: Dec 20 2019
+ * Last Updated: Sept 5 2020
+ *
+ * Calculations for colorJumper
  */
 
 import java.lang.Math;
@@ -33,7 +35,7 @@ public class ColorJumper {
    // enumerate the possible ways of dealing with operations
    // in the range 0-255 not being closed under addition/subtraction
    // ROLLOVER: mod the result by 255 to remain in the proper range
-   // STOP_AT_BOUND: if a number were to fall out of the range, instead 'cap' it at the most extreme possible value
+   // STOP_AT_BOUND: if a number were to fall out of the range, instead cap it at the lowest/highest possible value
    public void setClosure(Closure c) {
       typeOfClosure = c;
    }
