@@ -58,43 +58,19 @@ The other option is "Rollover" which takes the out of range value modulo 256. In
 
 ### How to run and explanation of files
 
-For now, run colorJumper_Swatches.java with no CLI; the parameters are hardcoded in the main method. I have plans to add in CLI in the near future. Currently, this program only works with hexadecimal representation of colors as input/output. I have tentative plans to add RGB representation along with CLI, but that is low priority.
-
-`colorJumper_Swatches.java` is the runner, handles the graphics, and calls HexColorJumper.java.\
-`HexColorJumper.java` does the calculations.\
-`HexColorJumperTest.java` consists of JUnit tests.
-
----
-
-### A note about the color gray
-
-A "pure gray" `midpoint(black,white)` used as a midpoint will return the complement of the initial color. Example:
-
-<img src="/README_images/pureGrayCreatesComplement.png" width="300" />
-
-However, not every (gray) color is achievable as a blend of only two colors. Using a gray that is darker or lighter than "pure gray" may not give the intended result. As far as I know, there is no remedy to this problem, as it is a consequence of additive mixing of two colors. Some examples:
-
-<img src="/README_images/offGrayDarkCreatesMisc.png" width="300" />
-<img src="/README_images/offGrayLightCreatesMisc.png" width="300" />
+Run `ColorJumperDemo.java` for the GUI.
 
 ---
 
 ### Code credit
 
-###### HexColorJumper.java
+###### ColorJumper.java
 Base code for a color blender in Java by [Valentin Deleplace on StackOverflow].
 
-###### HexColorJumperTest.java
 Results of test cases determined with [Eric A. Meyer's Color Blender].
-
-###### colorJumper_Swatches.java
-Base code for rectangle 2D graphics in Java by [Wayan Saryada on Kode Java].\
-Method for handling new lines with Java Graphics2D drawString by [Andreas Lundblad on StackOverflow].
 
 
 
 
 [Valentin Deleplace on StackOverflow]: https://stackoverflow.com/a/14482509
 [Eric A. Meyer's Color Blender]: https://meyerweb.com/eric/tools/color-blend/
-[Wayan Saryada on Kode Java]: https://kodejava.org/how-do-i-draw-a-rectangle-in-java-2d/
-[Andreas Lundblad on StackOverflow]: https://stackoverflow.com/a/4413153

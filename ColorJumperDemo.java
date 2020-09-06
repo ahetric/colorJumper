@@ -62,7 +62,7 @@ import javafx.util.Duration;
 import javafx.scene.control.RadioMenuItem;
 
  
-public class ColorPickerDemo extends Application {
+public class ColorJumperDemo extends Application {
 
 
     // square and padding size
@@ -94,8 +94,8 @@ public class ColorPickerDemo extends Application {
     Color text2Color;
     Color text3Color;
     
-    // create HexColorJumper object
-    HexColorJumper jump = new HexColorJumper();
+    // create ColorJumper object
+    ColorJumper jump = new ColorJumper();
     
     // create alert button
     Button alert = new Button("!");
@@ -296,7 +296,7 @@ public class ColorPickerDemo extends Application {
         
         
         /* ----- ----- ------ ----- ----- ----- ----- ------ ----- -----
-           Make sure that both starting colors of the HexColorJumper are initialized
+           Make sure that both starting colors of the ColorJumper are initialized
            ----- ----- ------ ----- ----- ----- ----- ------ ----- ----- */
         jump.setC1(color1);
         jump.setC2(color2);

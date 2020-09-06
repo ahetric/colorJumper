@@ -5,7 +5,7 @@
 
 import java.lang.Math;
 
-public class HexColorJumper {
+public class ColorJumper {
 
    private static String initial;
    private static String midpoint;
@@ -28,7 +28,7 @@ public class HexColorJumper {
    private static boolean greenCompromised;
    private static boolean blueCompromised;
    
-   private static Closure typeOfClosure = Closure.ROLLOVER;
+   private static Closure typeOfClosure = Closure.STOP_AT_BOUND;
    
    // enumerate the possible ways of dealing with operations
    // in the range 0-255 not being closed under addition/subtraction
@@ -39,12 +39,12 @@ public class HexColorJumper {
    }
    
    // Constructor
-   public HexColorJumper() {
+   public ColorJumper() {
       // Purposefully empty, use setters later
    }
    
    // Constructor
-   public HexColorJumper(String color1, String color2) {
+   public ColorJumper(String color1, String color2) {
       initial = color1;
       midpoint = color2;
    }
@@ -301,12 +301,12 @@ public class HexColorJumper {
    
     //runner within this class
     public static void main(String args[]) {
-        //HexColorJumper jump = new HexColorJumper("#FF0000", "#B3334D");
-        HexColorJumper jump = new HexColorJumper("#FE0000", "#FF0000");
+        ColorJumper jump = new ColorJumper("#FF0000", "#B3334D");
+        //ColorJumper jump = new ColorJumper("#FE0000", "#FF0000");
         String c = jump.calculate(initial, midpoint);
         System.out.println("\n" + c);
         
         if (redCompromised || greenCompromised || blueCompromised)
-            System.out.println("welp");
+            System.out.println("Note - this color is out of gamut and has been capped at a lower or upper bound.");
     }
 }
