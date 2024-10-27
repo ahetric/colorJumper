@@ -1,8 +1,8 @@
-# colorJumper
+# Color Jumper
 
-### What is colorJumper?
+### What is Color Jumper?
 
-colorJumper works as a counterpart to a color blender. There are many color blenders available that return the midpoint of two color values. colorJumper takes two colors - an **initial color** and a **midpoint color** - and returns a **result** such that the midpoint of the **initial color** and the **result** is equal to the **midpoint color**. In other words, colorJumper returns a **result** such that the **initial color** and **result** are equidistant to the **midpoint**.
+Color Jumper works as a counterpart to a color blender. There are many color blenders available that return the midpoint of two color values. Color Jumper takes two colors - an **initial color** and a **midpoint color** - and returns a **result** such that the midpoint of the **initial color** and the **result** is equal to the **midpoint color**. In other words, Color Jumper returns a **result** such that the **initial color** and **result** are equidistant to the **midpoint**.
 
 For example, color blenders behave like this:
 
@@ -12,7 +12,7 @@ For example, color blenders behave like this:
 
 <img src="/README_images/color_blenders.png" width="300" />
 
-However, colorJumper behaves like this:
+However, Color Jumper behaves like this:
 
  <sub>Parameter 1</sub> | <sub>Parameter 2</sub> | <sub>Color Result</sub> | <sub>Calculation</sub>
 :----------------------:|:----------------------:|:-----------------------:|:-----------
@@ -24,7 +24,7 @@ However, colorJumper behaves like this:
 
 ### Features
 
-colorJumper has a simple GUI. Upon launch, two random colors will be chosen as inputs, the result will be calculated, and all three colors will be displayed. Each color can be selected with a javafx color picker.
+Color Jumper has a simple GUI. Upon launch, two random colors will be chosen as inputs, the result will be calculated, and all three colors will be displayed. Each color can be selected with a javafx color picker.
 
 <img src="/README_images/see_colors.png" width="300" />
 
