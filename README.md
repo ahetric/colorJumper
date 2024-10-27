@@ -56,7 +56,7 @@ The other option is "Rollover" which takes the out of range value modulo 256. In
 
 ---
 
-### How to run and explanation of files
+### How to run
 
 Run `ColorJumperDemo.java` for the GUI.
 
